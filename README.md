@@ -22,3 +22,4 @@ Today I successfully completed the initial configuration and setup of the Django
 - Verified the project by accessing the default Django welcome page in the browser.
 
 The development environment is now fully configured and ready for application-level implementation.
+- [DjangoFrameWorkLearning](https://github.com/Md-Sohag-Ali/Full-Stack-Web_B210101014/tree/main/Django%20Basic)
