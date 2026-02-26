@@ -22,4 +22,22 @@ Today I successfully completed the initial configuration and setup of the Django
 - Verified the project by accessing the default Django welcome page in the browser.
 
 The development environment is now fully configured and ready for application-level implementation.
+
+📅 Day – 02 Progress
+✅ Topics Covered
+
+Django Settings Explained
+
+How Django Works
+
+URLs & HTTPResponse
+
+Django Template
+
+Bootstrap Integration
+## 🎯 What I Learned Today
+- How Django internally processes a request
+- How URLs connect with views
+- How templates render dynamic content
+- How to integrate frontend styling with Bootstrap
 - [DjangoFrameWorkLearning](https://github.com/Md-Sohag-Ali/Full-Stack-Web_B210101014/tree/main/Django%20Basic)
