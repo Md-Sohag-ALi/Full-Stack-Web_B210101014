@@ -40,4 +40,54 @@ Bootstrap Integration
 - How URLs connect with views
 - How templates render dynamic content
 - How to integrate frontend styling with Bootstrap
+
+  📅 Day–03 Progress
+📚 Topics Covered:
+
+12. Django Static Files
+
+Learned how to configure static files
+
+Understood STATIC_URL, STATIC_ROOT, and STATICFILES_DIRS
+
+Used {% load static %} in templates
+
+13. Django Apps
+
+Created apps using startapp command
+
+Understood app structure (models.py, views.py, admin.py, etc.)
+
+Connected app with the main project
+
+14. Django Admin Panel
+
+Created superuser
+
+Explored Django admin dashboard
+
+Registered models in admin panel
+
+15. Django Model
+
+Created models
+
+Learned different field types (CharField, IntegerField, etc.)
+
+Used __str__() method
+
+16. Migrations
+
+Used makemigrations
+
+Used migrate
+
+Understood how database tables are created
+
+🛠️ Commands Practiced:
+-python manage.py startapp appname
+-python manage.py makemigrations
+-python manage.py migrate
+-python manage.py createsuperuser
+-python manage.py runserver
 - [DjangoFrameWorkLearning](https://github.com/Md-Sohag-Ali/Full-Stack-Web_B210101014/tree/main/Django%20Basic)
