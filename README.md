@@ -3,12 +3,12 @@
 
 Today I successfully completed the initial configuration and setup of the Django project for my Full Stack Web Development course.
 
-#### 🔧 Environment Setup
+1.🔧 Environment Setup
 - Created and activated a virtual environment to maintain project dependency isolation.
 - Installed Django framework using pip.
 - Initialized a new Django project.
 
-#### 📂 Project Structure Analysis
+2.📂 Project Structure Analysis
 - Explored and understood the Django project architecture.
 - Analyzed the purpose of core files:
   - `manage.py` – Project management and command-line utility.
@@ -17,7 +17,7 @@ Today I successfully completed the initial configuration and setup of the Django
   - `asgi.py` & `wsgi.py` – Deployment configuration files.
 - Observed automatic creation of the SQLite database (`db.sqlite3`).
 
-#### 🚀 Execution
+3. Execution
 - Successfully ran the Django development server.
 - Verified the project by accessing the default Django welcome page in the browser.
 
@@ -26,15 +26,15 @@ The development environment is now fully configured and ready for application-le
 📅 Day – 02 Progress
 ✅ Topics Covered
 
-Django Settings Explained
+4.Django Settings Explained
 
-How Django Works
+5.How Django Works
 
-URLs & HTTPResponse
+6.URLs & HTTPResponse
 
-Django Template
+7.Django Template
 
-Bootstrap Integration
+8.Bootstrap Integration
 ## 🎯 What I Learned Today
 - How Django internally processes a request
 - How URLs connect with views
@@ -44,7 +44,7 @@ Bootstrap Integration
   📅 Day–03 Progress
 📚 Topics Covered:
 
-12. Django Static Files
+9. Django Static Files
 
 Learned how to configure static files
 
@@ -52,7 +52,7 @@ Understood STATIC_URL, STATIC_ROOT, and STATICFILES_DIRS
 
 Used {% load static %} in templates
 
-13. Django Apps
+10. Django Apps
 
 Created apps using startapp command
 
@@ -60,7 +60,7 @@ Understood app structure (models.py, views.py, admin.py, etc.)
 
 Connected app with the main project
 
-14. Django Admin Panel
+11. Django Admin Panel
 
 Created superuser
 
@@ -68,7 +68,7 @@ Explored Django admin dashboard
 
 Registered models in admin panel
 
-15. Django Model
+12. Django Model
 
 Created models
 
@@ -76,7 +76,7 @@ Learned different field types (CharField, IntegerField, etc.)
 
 Used __str__() method
 
-16. Migrations
+13. Migrations
 
 Used makemigrations
 
