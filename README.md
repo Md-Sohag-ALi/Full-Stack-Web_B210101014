@@ -182,5 +182,71 @@ Completed HTML (Level 1 → Pro)
 
 ---
 
-✍️ **Author:** Sk Sohag
+## 🔹 Day 05
+<details>
+<summary>▶ View Details</summary>
+
+### 📌 Topics Covered
+
+#### 🎯 CSS Selectors
+- Universal Selector (`*`)
+- ID Selector (`#box`)
+- Class Selector (`.heading`)
+
+#### 🎯 Text Properties
+- Text decoration (underline)
+- Font weight (bold)
+- Line height
+- Text transform (capitalize)
+
+#### 🎯 Box Model
+- Width & Height
+- Padding & Margin
+- Border & Border-radius
+
+#### 🎯 Display Property
+- Inline
+- Block
+- None
+
+#### 🎯 Opacity
+- RGBA color transparency
+
+#### 🎯 Positioning
+- Relative Position
+- Absolute Position
+- Top, Left properties
+
+#### 🎯 Z-index
+- Layer control using z-index
+
+#### 🎯 Flexbox
+- `display: flex`
+- `justify-content`
+- `align-items`
+
+#### 🎯 Background
+- Background Image
+- Background Size (cover)
+
+#### 🎯 Transition
+- Smooth hover effect
+- Transform (scale)
+
+#### 🎯 Animation
+- `@keyframes`
+- Infinite rotation (Loader)
+
+#### 🎯 Media Queries (Responsive Design)
+- Different screen sizes:
+  - max-width: 300px
+  - 300px–400px
+  - 400px–600px
+  - 600px+
+
+</details>
+
+---
+
+✍️ **Author:** Sk Sohag Khan
 🎓 CSE Student | Future Full Stack Developer 🚀
