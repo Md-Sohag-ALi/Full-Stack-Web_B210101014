@@ -91,3 +91,59 @@ Understood how database tables are created
 -python manage.py createsuperuser
 -python manage.py runserver
 - [DjangoFrameWorkLearning](https://github.com/Md-Sohag-Ali/Full-Stack-Web_B210101014/tree/main/Django%20Basic)
+
+📅 Day 04 Progress – HTML Learning
+🚀 Overview
+
+Today I completed important concepts of HTML (Level 1 → Pro).
+I practiced building a structured webpage and covered most of the essential tags required for real-world development.
+
+📚 Topics Covered
+🔹 Basic Structure
+HTML Boilerplate (<!DOCTYPE html>)
+<html>, <head>, <body>
+Meta tags & Title
+🔹 Text & Formatting
+Headings (h1 - h6)
+Paragraph (<p>)
+Formatting tags: <b>, <i>, <u>
+Line break <br> & horizontal line <hr>
+Subscript <sub> & Superscript <sup>
+Preformatted text <pre>
+🔹 Links & Media
+Anchor tag <a>
+Image tag <img>
+Video tag <video>
+iFrame <iframe>
+🔹 Layout & Semantic Tags
+<header>, <main>, <footer>
+<section>, <article>, <aside>
+<div> (block element)
+<span> (inline element)
+🔹 Lists
+Ordered list <ol>
+Unordered list <ul>
+Nested list
+🔹 Tables
+<table>, <tr>, <td>, <th>
+<thead>, <tbody>
+<caption>
+🔹 Forms (🔥 Important)
+<form>
+<input> (text, password, radio, checkbox)
+<label>
+<textarea>
+<select> & <option>
+Submit button
+🔹 Attributes
+id & class
+src, href, alt
+width, height
+🛠️ Practice Work
+Built a portfolio-style HTML page
+Added:
+Profile section
+Education & experience
+Table for student data
+Full registration form
+External links and media
