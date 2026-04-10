@@ -1,0 +1,148 @@
+
+* {
+    font-family: Arial;
+}
+
+h1 {
+    color: red;
+    text-align: center;
+}
+
+#box {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}
+
+.heading {
+    color: green;
+}
+
+p {
+    text-decoration: underline;
+    font-weight: bold;
+    line-height: 25px;
+    text-transform: capitalize;
+}
+
+.box-model {
+    height: 100px;
+    width: 100px;
+    background-color: orange;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.inline {
+    display: inline;
+    background: yellow;
+}
+
+.block {
+    display: block;
+    background: pink;
+}
+
+.none {
+    display: none;
+}
+
+.opacity-box {
+    background-color: rgba(255, 0, 0, 0.5);
+    height: 100px;
+    width: 100px;
+}
+
+.position-box {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    background: lightblue;
+    width: 100px;
+    height: 100px;
+}
+
+.z1 {
+    position: absolute;
+    background: red;
+    z-index: 1;
+}
+
+.z2 {
+    position: absolute;
+    background: green;
+    left: 20px;
+    top: 20px;
+    z-index: 2;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #ddd;
+    height: 150px;
+}
+
+.flex-item {
+    background: purple;
+    color: white;
+    padding: 20px;
+}
+
+.bg {
+    height: 150px;
+    background-image: url("https://via.placeholder.com/300");
+    background-size: cover;
+}
+
+.transition-box {
+    width: 100px;
+    height: 100px;
+    background: red;
+    transition: all 1s ease;
+}
+
+.transition-box:hover {
+    background: green;
+    transform: scale(1.2);
+}
+
+.loader {
+    height: 100px;
+    width: 100px;
+    border: 10px solid gray;
+    border-top: 10px solid blue;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.media-box {
+    width: 100px;
+    height: 100px;
+    background: black;
+}
+
+@media (max-width: 300px) {
+    .media-box { background: green; }
+}
+
+@media (min-width: 300px) and (max-width: 400px) {
+    .media-box { background: pink; }
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+    .media-box { background: red; }
+}
+
+@media (min-width: 600px) {
+    .media-box { background: blue; }
+}
+
