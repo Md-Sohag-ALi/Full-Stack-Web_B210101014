@@ -1,93 +1,252 @@
-# Full-Stack-Web_B210101014
+# 📚 Learning Progress
+
+## 📅 Week 1
+
+---
+
+### 🔹 Day 01
+
+<details>
+<summary>View Details</summary>
+
 ### ✅ Day 1 Progress (25 February 2026)
 
-Today I successfully completed the initial configuration and setup of the Django project for my Full Stack Web Development course.
+#### 🔧 Environment Setup
 
-1.🔧 Environment Setup
-- Created and activated a virtual environment to maintain project dependency isolation.
-- Installed Django framework using pip.
-- Initialized a new Django project.
+* Created and activated a virtual environment
+* Installed Django using pip
+* Initialized a new Django project
 
-2.📂 Project Structure Analysis
-- Explored and understood the Django project architecture.
-- Analyzed the purpose of core files:
-  - `manage.py` – Project management and command-line utility.
-  - `settings.py` – Main configuration file.
-  - `urls.py` – URL routing configuration.
-  - `asgi.py` & `wsgi.py` – Deployment configuration files.
-- Observed automatic creation of the SQLite database (`db.sqlite3`).
+#### 📂 Project Structure Analysis
 
-3. Execution
-- Successfully ran the Django development server.
-- Verified the project by accessing the default Django welcome page in the browser.
+* **manage.py** – Command-line utility
 
-The development environment is now fully configured and ready for application-level implementation.
+* **settings.py** – Configuration
 
-📅 Day – 02 Progress
-✅ Topics Covered
+* **urls.py** – Routing
 
-4.Django Settings Explained
+* **asgi.py & wsgi.py** – Deployment
 
-5.How Django Works
+* SQLite database (`db.sqlite3`) created automatically
 
-6.URLs & HTTPResponse
+#### ▶️ Execution
 
-7.Django Template
+* Ran development server
+* Opened Django welcome page
 
-8.Bootstrap Integration
-## 🎯 What I Learned Today
-- How Django internally processes a request
-- How URLs connect with views
-- How templates render dynamic content
-- How to integrate frontend styling with Bootstrap
+✅ Environment ready for development
 
-  📅 Day–03 Progress
-📚 Topics Covered:
+</details>
 
-9. Django Static Files
+---
 
-Learned how to configure static files
+### 🔹 Day 02
 
-Understood STATIC_URL, STATIC_ROOT, and STATICFILES_DIRS
+<details>
+<summary>View Details</summary>
 
-Used {% load static %} in templates
+### 📅 Day 02 Progress
 
-10. Django Apps
+#### 📚 Topics Covered
 
-Created apps using startapp command
+* Django Settings Explained
+* How Django Works
+* URLs & HTTPResponse
+* Django Template
+* Bootstrap Integration
 
-Understood app structure (models.py, views.py, admin.py, etc.)
+#### 🎯 What I Learned
 
-Connected app with the main project
+* Request processing in Django
+* URL → View connection
+* Template rendering
+* Bootstrap integration
 
-11. Django Admin Panel
+</details>
 
-Created superuser
+---
 
-Explored Django admin dashboard
+### 🔹 Day 03
 
-Registered models in admin panel
+<details>
+<summary>View Details</summary>
 
-12. Django Model
+### 📅 Day 03 Progress
 
-Created models
+#### 📚 Topics Covered
 
-Learned different field types (CharField, IntegerField, etc.)
+##### 🔹 Static Files
 
-Used __str__() method
+* STATIC_URL, STATIC_ROOT, STATICFILES_DIRS
+* `{% load static %}`
 
-13. Migrations
+##### 🔹 Django Apps
 
-Used makemigrations
+* Created apps (`startapp`)
+* App structure understanding
 
-Used migrate
+##### 🔹 Admin Panel
 
-Understood how database tables are created
+* Created superuser
+* Registered models
 
-🛠️ Commands Practiced:
--python manage.py startapp appname
--python manage.py makemigrations
--python manage.py migrate
--python manage.py createsuperuser
--python manage.py runserver
-- [DjangoFrameWorkLearning](https://github.com/Md-Sohag-Ali/Full-Stack-Web_B210101014/tree/main/Django%20Basic)
+##### 🔹 Models
+
+* Created models
+* Field types (CharField, IntegerField)
+* `__str__()` method
+
+##### 🔹 Migrations
+
+* makemigrations
+* migrate
+
+#### 🛠️ Commands
+
+```
+python manage.py startapp appname
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+</details>
+
+---
+
+### 🔹 Day 04
+
+<details>
+<summary>View Details</summary>
+
+### 📅 Day 04 Progress – HTML Learning
+
+#### 🚀 Overview
+
+Completed HTML (Level 1 → Pro)
+
+#### 📚 Topics Covered
+
+##### 🔹 Basic Structure
+
+* HTML Boilerplate
+* `<html>`, `<head>`, `<body>`
+* Meta & Title
+
+##### 🔹 Text & Formatting
+
+* Headings (h1-h6)
+* Paragraph `<p>`
+* `<b>`, `<i>`, `<u>`
+* `<br>`, `<hr>`
+* `<sub>`, `<sup>`
+* `<pre>`
+
+##### 🔹 Links & Media
+
+* `<a>`
+* `<img>`
+* `<video>`
+* `<iframe>`
+
+##### 🔹 Layout
+
+* `<header>`, `<main>`, `<footer>`
+* `<section>`, `<article>`, `<aside>`
+* `<div>`, `<span>`
+
+##### 🔹 Lists
+
+* `<ul>`, `<ol>`
+* Nested list
+
+##### 🔹 Tables
+
+* `<table>`, `<tr>`, `<td>`, `<th>`
+* `<thead>`, `<tbody>`, `<caption>`
+
+##### 🔹 Forms
+
+* `<form>`
+* `<input>` (text, password, radio, checkbox)
+* `<textarea>`
+* `<select>`
+
+#### 🎯 Outcome
+
+✅ Built complete HTML page
+✅ Strong foundation in HTML
+
+</details>
+
+---
+
+## 🔹 Day 05
+<details>
+<summary>▶ View Details</summary>
+
+### 📌 Topics Covered
+
+#### 🎯 CSS Selectors
+- Universal Selector (`*`)
+- ID Selector (`#box`)
+- Class Selector (`.heading`)
+
+#### 🎯 Text Properties
+- Text decoration (underline)
+- Font weight (bold)
+- Line height
+- Text transform (capitalize)
+
+#### 🎯 Box Model
+- Width & Height
+- Padding & Margin
+- Border & Border-radius
+
+#### 🎯 Display Property
+- Inline
+- Block
+- None
+
+#### 🎯 Opacity
+- RGBA color transparency
+
+#### 🎯 Positioning
+- Relative Position
+- Absolute Position
+- Top, Left properties
+
+#### 🎯 Z-index
+- Layer control using z-index
+
+#### 🎯 Flexbox
+- `display: flex`
+- `justify-content`
+- `align-items`
+
+#### 🎯 Background
+- Background Image
+- Background Size (cover)
+
+#### 🎯 Transition
+- Smooth hover effect
+- Transform (scale)
+
+#### 🎯 Animation
+- `@keyframes`
+- Infinite rotation (Loader)
+
+#### 🎯 Media Queries (Responsive Design)
+- Different screen sizes:
+  - max-width: 300px
+  - 300px–400px
+  - 400px–600px
+  - 600px+
+
+</details>
+
+---
+
+✍️ **Author:** Sk Sohag Khan
+🎓 CSE Student | Future Full Stack Developer 🚀
