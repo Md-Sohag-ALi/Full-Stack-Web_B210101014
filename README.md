@@ -246,6 +246,88 @@ Completed HTML (Level 1 → Pro)
 
 </details>
 
+📘 Day 05
+🐍 Python Learning
+
+This repository contains my Python learning practice organized by topics.
+
+📁 Project Files
+<details> <summary>📂 Click to view all files</summary>
+firstProgramme.py
+printSum.py
+Variables.py
+DataType.py
+TypeConversion.py
+Input in python.py
+Arithmetic operators.py
+String and conditional statements.py
+List in Python.py
+Tuple in python.py
+Dictionary and Set in python.py
+Practice.py
+</details>
+📚 Topics Covered
+<details> <summary>📌 First Programme</summary>
+print("Hello World")
+</details>
+<details> <summary>📌 Print Sum</summary>
+# example
+a = 5
+b = 10
+print(a + b)
+</details>
+<details> <summary>📌 Variables</summary>
+x = 10
+name = "Python"
+</details>
+<details> <summary>📌 Data Types</summary>
+a = 10        # int
+b = 3.14      # float
+c = "Hello"   # string
+d = True      # boolean
+</details>
+<details> <summary>📌 Type Conversion</summary>
+a = "10"
+b = int(a)
+print(b + 5)
+</details>
+<details> <summary>📌 Input in Python</summary>
+name = input("Enter your name: ")
+print(name)
+</details>
+<details> <summary>📌 Arithmetic Operators</summary>
+a = 10
+b = 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+</details>
+<details> <summary>📌 String and Conditional Statements</summary>
+age = 18
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Not Adult")
+</details>
+<details> <summary>📌 List in Python</summary>
+my_list = [1, 2, 3, 4]
+print(my_list)
+</details>
+<details> <summary>📌 Tuple in Python</summary>
+my_tuple = (1, 2, 3)
+print(my_tuple)
+</details>
+<details> <summary>📌 Dictionary and Set in Python</summary>
+my_dict = {"name": "Sohag", "age": 20}
+my_set = {1, 2, 3, 3}
+</details>
+<details> <summary>📌 Practice</summary>
+# Practice problems
+print("Keep practicing!")
+</details>
 ---
 
 ✍️ **Author:** Sk Sohag Khan
