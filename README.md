@@ -246,8 +246,6 @@ Completed HTML (Level 1 → Pro)
 
 </details>
 
-# 🐍 Python Learning Progress
-
 ---
 
 ### 🔹 Day 05
