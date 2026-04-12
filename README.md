@@ -248,7 +248,7 @@ Completed HTML (Level 1 → Pro)
 
 ---
 
-### 🔹 Day 05
+### 🔹 Day 06
 <details>
 <summary>▶ View Details</summary>
 
