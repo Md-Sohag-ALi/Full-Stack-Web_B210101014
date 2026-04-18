@@ -327,6 +327,160 @@ Today I learned how to write **clean, structured, and error-free Python programs
 
 </details>
 
+## 🔹 Day 02
+
+<details>
+<summary>▶ View Details</summary>
+
+### 🕒 Date & Time in Python
+
+---
+
+#### 💻 Code
+
+```python
+import datetime
+
+# Current Date & Time
+now = datetime.datetime.now().day
+today = datetime.datetime.today()
+
+print(now)
+print(today)
+
+# Custom Date
+custom_date = datetime.datetime(2026,4,15,4,59,0)
+print(custom_date, type(custom_date))
+
+# Datetime → String
+d1 = today.strftime("%Y/%M/%d %H:%M:%S")
+d2 = today.strftime("%d,%B,%Y %H:%M:%S")
+d3 = today.strftime("%d,%b,%Y %H:%M:%S")
+d4 = today.strftime("%d,%b,%Y -%A %H:%M:%S")
+d5 = today.strftime("%d,%b,%Y -%a %I:%M:%S %p")
+
+print(d1)
+print(d2)
+print(d3)
+print(d4)
+print(d5)
+print(type(d5))
+
+# String → Datetime
+date_str = "15,Apr,2026 -Wed 05:23:09 PM"
+date_obj = datetime.datetime.strptime(date_str,"%d,%b,%Y -%a %I:%M:%S %p")
+print(date_obj, type(date_obj))
+
+# Date Arithmetic
+from datetime import timedelta
+
+today = datetime.datetime.today()
+
+tommorow = today + timedelta(days=1)
+yesterday = today - timedelta(days=1)
+test = today + timedelta(hours=5)
+
+print(tommorow)
+print(yesterday)
+print(test)
+
+present = datetime.datetime.strptime("20 Apr 2026", "%d %b %Y")
+prev = datetime.datetime.strptime("10 Apr 2026","%d %b %Y")
+
+print(present - prev)
+```
+
+---
+
+### 🌐 JSON & API (Python)
+
+---
+
+### 📁 Files
+
+* datetime.py
+* json_basics.py
+* serialization.py
+* deserialization.py
+* api_get.py
+* api_post.py
+* api_patch.py
+* api_put.py
+* api_delete.py
+* api_data_handling.py
+
+---
+
+### 📚 Topics
+
+* Date & Time in Python
+* JSON (JavaScript Object Notation)
+* Serialization & Deserialization
+* CRUD Operations
+* API using requests
+
+---
+
+### 💻 Code (API)
+
+#### 🔹 Serialization
+
+```python
+import json
+data = {"user_id":123,"post":"Hello","edit":True}
+print(json.dumps(data, indent=4))
+```
+
+#### 🔹 Deserialization
+
+```python
+json_string = '{"user_id":123,"post":"Hello","edit":true}'
+print(json.loads(json_string))
+```
+
+#### 🔹 GET
+
+```python
+import requests
+print(requests.get("https://jsonplaceholder.typicode.com/posts").json())
+```
+
+#### 🔹 POST
+
+```python
+value = {"userId":1,"id":101,"title":"test","body":"test"}
+print(requests.post("https://jsonplaceholder.typicode.com/posts", value).json())
+```
+
+#### 🔹 PATCH
+
+```python
+print(requests.patch("https://jsonplaceholder.typicode.com/posts/1", {"title":"test"}).json())
+```
+
+#### 🔹 PUT
+
+```python
+value = {"userId":1,"id":101,"title":"test","body":"test"}
+print(requests.put("https://jsonplaceholder.typicode.com/posts/1", value).json())
+```
+
+#### 🔹 DELETE
+
+```python
+print(requests.delete("https://jsonplaceholder.typicode.com/posts/1").json())
+```
+
+---
+
+### 🎯 Conclusion
+
+* Learned Date & Time handling
+* Practiced JSON conversion
+* Understood CRUD & API
+
+</details>
+
 ---
 
 ✍️ **Author:** Sk Sohag Khan
