@@ -338,6 +338,109 @@ Today I learned how to write **clean, structured, and error-free Python programs
 
 </details>
 
+---
+
+## 📅 Week 2
+
+### 🔹 Day 01
+
+---
+<details>
+<summary>View Details</summary>
+
+### 📚 Topics Learned
+
+#### 🧱 OOP Core Practice
+- Class & Object implementation
+- Constructor (`__init__`) and string representation (`__str__`)
+- Updating object attributes using methods
+
+#### 🔢 Custom Class Example
+- Fraction class with:
+  - Validation (denominator ≠ 0)
+  - Simplification using `math.gcd()`
+  - Operator overloading (`__add__`)
+
+#### ⚙️ Special Methods (Dunder Methods)
+- `__init__()` → Object initialization
+- `__str__()` → Human-readable output
+- `__add__()` → Operator overloading
+
+#### 🏷️ Class Method & Static Method
+- `@classmethod` → Access class variables
+- `@staticmethod` → Utility method without class/object access
+
+---
+
+### 🧬 Inheritance Types
+
+- ✅ Single Inheritance  
+- ✅ Multiple Inheritance  
+- ✅ Multilevel Inheritance  
+- ✅ Hierarchical Inheritance  
+- ✅ Hybrid Inheritance  
+
+---
+
+### 🔁 Polymorphism
+- Same method name, different behavior
+- Example: `make_sound()` for different animals
+
+---
+
+### ➕ Method Concepts
+- Method Overloading (default arguments)
+- Method Overriding (same method in child class)
+
+---
+
+### 🔒 Encapsulation
+- Private variable using `__balance`
+- Controlled access via methods
+
+---
+
+### 🎭 Abstraction
+- Abstract Base Class using `abc`
+- `@abstractmethod` enforcement
+
+---
+
+### 🔌 Interface (Python Style)
+- Implemented using abstract classes
+- Only method definitions, no implementation
+
+---
+
+### 🏗️ Design Patterns
+
+#### 1️⃣ Singleton Pattern
+- Ensures only one instance exists
+
+#### 2️⃣ Factory Pattern
+- Creates objects based on input
+
+#### 3️⃣ Builder Pattern
+- Step-by-step object creation (method chaining)
+
+---
+
+### 💡 Key Takeaways
+
+- Strong understanding of OOP concepts
+- Learned real-world class design
+- Practiced inheritance & polymorphism deeply
+- Explored design patterns for scalable code
+
+---
+
+### 🚀 Practice Outcome
+
+- Built multiple classes with real logic
+- Implemented operator overloading
+- Designed reusable and maintainable code structures
+
+</details>
 ## 🔹 Day 02
 
 <details>
@@ -492,109 +595,6 @@ print(requests.delete("https://jsonplaceholder.typicode.com/posts/1").json())
 
 </details>
 
----
-
-## 📅 Week 2
-
-### 🔹 Day 01
-
----
-<details>
-<summary>View Details</summary>
-
-### 📚 Topics Learned
-
-#### 🧱 OOP Core Practice
-- Class & Object implementation
-- Constructor (`__init__`) and string representation (`__str__`)
-- Updating object attributes using methods
-
-#### 🔢 Custom Class Example
-- Fraction class with:
-  - Validation (denominator ≠ 0)
-  - Simplification using `math.gcd()`
-  - Operator overloading (`__add__`)
-
-#### ⚙️ Special Methods (Dunder Methods)
-- `__init__()` → Object initialization
-- `__str__()` → Human-readable output
-- `__add__()` → Operator overloading
-
-#### 🏷️ Class Method & Static Method
-- `@classmethod` → Access class variables
-- `@staticmethod` → Utility method without class/object access
-
----
-
-### 🧬 Inheritance Types
-
-- ✅ Single Inheritance  
-- ✅ Multiple Inheritance  
-- ✅ Multilevel Inheritance  
-- ✅ Hierarchical Inheritance  
-- ✅ Hybrid Inheritance  
-
----
-
-### 🔁 Polymorphism
-- Same method name, different behavior
-- Example: `make_sound()` for different animals
-
----
-
-### ➕ Method Concepts
-- Method Overloading (default arguments)
-- Method Overriding (same method in child class)
-
----
-
-### 🔒 Encapsulation
-- Private variable using `__balance`
-- Controlled access via methods
-
----
-
-### 🎭 Abstraction
-- Abstract Base Class using `abc`
-- `@abstractmethod` enforcement
-
----
-
-### 🔌 Interface (Python Style)
-- Implemented using abstract classes
-- Only method definitions, no implementation
-
----
-
-### 🏗️ Design Patterns
-
-#### 1️⃣ Singleton Pattern
-- Ensures only one instance exists
-
-#### 2️⃣ Factory Pattern
-- Creates objects based on input
-
-#### 3️⃣ Builder Pattern
-- Step-by-step object creation (method chaining)
-
----
-
-### 💡 Key Takeaways
-
-- Strong understanding of OOP concepts
-- Learned real-world class design
-- Practiced inheritance & polymorphism deeply
-- Explored design patterns for scalable code
-
----
-
-### 🚀 Practice Outcome
-
-- Built multiple classes with real logic
-- Implemented operator overloading
-- Designed reusable and maintainable code structures
-
-</details>
 ✍️ **Author:** Sk Sohag Khan  
 🎓 CSE Student | Future Full Stack Developer 🚀
 
