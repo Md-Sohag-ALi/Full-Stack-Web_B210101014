@@ -441,7 +441,8 @@ Today I learned how to write **clean, structured, and error-free Python programs
 - Designed reusable and maintainable code structures
 
 </details>
-## 🔹 Day 02
+
+🔹 Day 02
 
 <details>
 <summary>▶ View Details</summary>
@@ -594,6 +595,151 @@ print(requests.delete("https://jsonplaceholder.typicode.com/posts/1").json())
 * Understood CRUD & API
 
 </details>
+
+---
+
+🔹 Day 03 – JavaScript Practice
+
+<details>
+<summary>▶ View Details</summary>
+
+📘 Today I practiced JavaScript basics, arrays, functions, objects, and DOM manipulation.
+
+---
+
+<details>
+<summary>💎 JavaScript Basics</summary>
+
+* `console.log()` usage
+* Variables (`let`, `const`)
+
+```js
+let x = 10;
+let str = "Sakib";
+let num = 1212;
+let y = 1234567890123456789n;
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 Operators & Conditions</summary>
+
+```js
+if (c == 10) {
+    console.log("Value Matched");
+}
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 Loops</summary>
+
+```js
+for (let color of colors) {
+    console.log(color);
+}
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 Arrays & Methods</summary>
+
+```js
+const names = ["raj","Taj"];
+const newNames = names.map(item => item + "___");
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 Functions</summary>
+
+```js
+const greet = () => {
+    console.log("Hello");
+};
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 Objects</summary>
+
+```js
+const person = {
+    name: "Sohag",
+    age: 25
+};
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 DOM Manipulation</summary>
+
+```js
+const el = document.getElementById("lalala");
+el.textContent = "Changed Text";
+```
+
+</details>
+
+---
+
+<details>
+<summary>💎 Events</summary>
+
+```js
+button.addEventListener("mouseover", colorBG);
+```
+
+</details>
+
+---
+
+## 🚀 Mini Project
+
+* Button hover → text change
+* DOM manipulation practice
+
+---
+
+## ⚠️ Challenges Faced
+
+* `document is not defined`
+* DOM confusion
+* innerHTML vs textContent
+
+---
+
+## ✅ Conclusion
+
+* Learned JS fundamentals
+* Practiced DOM
+
+---
+
+📌 Next Goal:
+➡️ DOM advanced
+➡️ Small projects
+
+</details>
+
 
 ✍️ **Author:** Sk Sohag Khan  
 🎓 CSE Student | Future Full Stack Developer 🚀
