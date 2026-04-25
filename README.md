@@ -740,6 +740,30 @@ button.addEventListener("mouseover", colorBG);
 
 </details>
 
+🔹 Day 04 – Tailwind CSS Basics
+
+<details>
+<summary>▶ Click to Expand</summary>
+
+## 📌 What I Learned Today
+
+Today I explored **Tailwind CSS** and learned how utility-first CSS works with real examples.
+
+---
+
+## 🔹 1. Tailwind Setup
+
+### 📁 Files Used
+- `index.html`
+- `style.css`
+- `style.out.css`
+
+### 💻 Tailwind Import
+
+```css
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+---
 
 ✍️ **Author:** Sk Sohag Khan  
 🎓 CSE Student | Future Full Stack Developer 🚀
