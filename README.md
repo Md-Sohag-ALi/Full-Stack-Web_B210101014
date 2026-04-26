@@ -763,7 +763,27 @@ Today I explored **Tailwind CSS** and learned how utility-first CSS works with r
 ```css
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+</details>
 ---
+## 🔹 Day 05 🚀
+
+<details>
+<summary>▶ View Details</summary>
+
+- Successfully deployed my portfolio website using Netlify 🌍  
+- Integrated contact form using Formspree 📧  
+- Fixed UI issues and improved design consistency 🎨  
+- Made the website fully responsive 📱  
+- Shared my portfolio on LinkedIn 💼  
+
+🔗 **Live Website:**  
+https://sksohagkhan-portfolio.netlify.app/
+</details>
+
+---
+
+
+
 
 ✍️ **Author:** Sk Sohag Khan  
 🎓 CSE Student | Future Full Stack Developer 🚀
