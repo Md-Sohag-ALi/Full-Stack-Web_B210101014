@@ -1,0 +1,8 @@
+@import "tailwindcss";  
+@custom-variant dark (&:where(.dark, .dark *));
+@theme{
+    --color-primary:#51007e;
+}
+.button{
+    @apply bg-white text-primary px-6 py-2 rounded-full;
+}

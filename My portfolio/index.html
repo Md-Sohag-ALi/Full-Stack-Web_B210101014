@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Md. Sohag Ali Portfolio - On the way of Competitive Programmer & Web Developer">
+    <title>Md. Sohag Ali — Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; }
+      :root {
+        --cyan: #00E5FF;
+        --pink: #FF4D6D;
+        --gold: #FFD700;
+        --bg: #080C14;
+        --card: #0D1321;
+        --border: rgba(0,229,255,0.12);
+        --text-muted: #5a7a8a;
+        --text-mid: #8aa0ae;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #c8dde6; overflow-x: hidden; }
+      body::before {
+        content: ''; position: fixed; inset: 0; z-index: 0;
+        background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,229,255,0.012) 2px, rgba(0,229,255,0.012) 4px);
+        pointer-events: none;
+      }
+      .cursor-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%); pointer-events: none; z-index: 1; transform: translate(-50%, -50%); transition: left 0.08s, top 0.08s; }
+      .grad-cyan { background: linear-gradient(135deg, #00E5FF, #0099bb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+      .grad-fire { background: linear-gradient(135deg, #FF4D6D, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+      .grad-full { background: linear-gradient(135deg, #00E5FF 0%, #FF4D6D 60%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; transition: all 0.35s cubic-bezier(0.23,1,0.32,1); }
+      .card:hover { border-color: rgba(0,229,255,0.35); box-shadow: 0 0 30px rgba(0,229,255,0.08); transform: translateY(-3px); }
+      .btn-cyan { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.6rem; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.82rem; font-weight: 700; color: var(--bg); background: var(--cyan); text-decoration: none; transition: all 0.25s; box-shadow: 0 0 20px rgba(0,229,255,0.25); border: none; cursor: pointer; }
+      .btn-cyan:hover { background: #33ecff; box-shadow: 0 0 35px rgba(0,229,255,0.5); transform: translateY(-1px); }
+      .btn-ghost { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.6rem; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.82rem; font-weight: 700; color: var(--cyan); background: transparent; border: 1px solid rgba(0,229,255,0.35); text-decoration: none; transition: all 0.25s; }
+      .btn-ghost:hover { background: rgba(0,229,255,0.08); border-color: var(--cyan); }
+      .nav-link { font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; position: relative; text-transform: uppercase; }
+      .nav-link:hover { color: var(--cyan); }
+      .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--cyan); transition: width 0.3s; }
+      .nav-link:hover::after { width: 100%; }
+      .section-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+      .section-label::before { content: '//'; color: var(--pink); font-size: 0.85rem; }
+      .chip { display: inline-flex; align-items: center; gap: 5px; padding: 0.3rem 0.85rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; border: 1px solid rgba(0,229,255,0.18); background: rgba(0,229,255,0.05); color: #a0c8d4; transition: all 0.2s; font-family: 'Space Mono', monospace; }
+      .chip:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,229,255,0.1); }
+      .chip-upcoming { border-color: rgba(255,215,0,0.25); background: rgba(255,215,0,0.05); color: #c8a800; }
+      .chip-upcoming:hover { border-color: var(--gold); color: var(--gold); background: rgba(255,215,0,0.1); }
+      .oj-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 12px; transition: all 0.3s; text-decoration: none; color: inherit; }
+      .oj-card:hover { border-color: rgba(0,229,255,0.4); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,255,0.1); }
+      .oj-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; font-weight: 700; font-family: 'Space Mono', monospace; }
+      .prog-track { background: rgba(255,255,255,0.05); border-radius: 3px; height: 4px; overflow: hidden; }
+      .prog-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--cyan), #0099bb); position: relative; overflow: hidden; }
+      .prog-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%); animation: shimmer 2s infinite; }
+      @keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+      .proj-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.35s cubic-bezier(0.23,1,0.32,1); }
+      .proj-card:hover { border-color: rgba(0,229,255,0.4); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,229,255,0.12); }
+      .form-input { background: rgba(0,229,255,0.03); border: 1px solid rgba(0,229,255,0.12); border-radius: 10px; padding: 0.75rem 1rem; color: #c8dde6; width: 100%; font-family: 'Outfit', sans-serif; font-size: 0.93rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+      .form-input:focus { border-color: rgba(0,229,255,0.5); box-shadow: 0 0 0 3px rgba(0,229,255,0.08); }
+      .form-input::placeholder { color: #2a4050; }
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      .float { animation: float 5s ease-in-out infinite; }
+      @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+      .blink { animation: blink 1s step-end infinite; }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+      .hobby-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; text-align: center; transition: all 0.3s; }
+      .hobby-card:hover { border-color: rgba(255,77,109,0.4); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,77,109,0.1); }
+      @media (max-width: 640px) {
+        .hero-name { font-size: 2.6rem !important; }
+        .two-col { grid-template-columns: 1fr !important; }
+        .three-col { grid-template-columns: 1fr !important; }
+        .four-col { grid-template-columns: 1fr 1fr !important; }
+      }
+    </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAVBAR -->
+<header id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,229,255,0.07);transition:transform 0.3s ease;">
+  <nav style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;">
+    <a href="#hero" style="font-family:'Space Mono',monospace;font-size:1rem;color:var(--cyan);text-decoration:none;letter-spacing:0.05em;">
+      <span style="color:var(--text-muted);">&lt;</span>Sohag<span style="color:var(--pink);">.</span>Ali<span style="color:var(--text-muted);">/&gt;</span>
+    </a>
+    <ul style="display:flex;align-items:center;gap:28px;list-style:none;">
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#oj" class="nav-link">OJ</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#education" class="nav-link">Education</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li><a href="mailto:sksohag0990@gmail.com" class="btn-cyan" style="padding:8px 18px;font-size:0.75rem;">Hire Me ↗</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main style="position:relative;z-index:2;">
+
+<!-- HERO -->
+<section id="hero" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 40px;overflow:hidden;position:relative;">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+  <div style="position:absolute;top:120px;left:40px;width:100px;height:100px;border-top:1px solid rgba(0,229,255,0.18);border-left:1px solid rgba(0,229,255,0.18);"></div>
+  <div style="position:absolute;bottom:60px;right:40px;width:100px;height:100px;border-bottom:1px solid rgba(255,77,109,0.18);border-right:1px solid rgba(255,77,109,0.18);"></div>
+
+  <div style="max-width:760px;text-align:center;position:relative;z-index:2;">
+    <div class="float" style="margin-bottom:24px;">
+      <div style="position:relative;display:inline-block;">
+        <img src="./images/sk3.png" alt="Md. Sohag Ali" style="width:130px;height:130px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,229,255,0.4);box-shadow:0 0 40px rgba(0,229,255,0.2),0 0 80px rgba(0,229,255,0.08);">
+        <span style="position:absolute;bottom:8px;right:8px;width:14px;height:14px;background:#00ff88;border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 8px #00ff88;display:block;"></span>
+      </div>
+    </div>
+
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:4px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--cyan);letter-spacing:0.1em;margin-bottom:20px;">
+      <span>●</span> AVAILABLE FOR OPPORTUNITIES
+    </div>
+
+    <h1 class="hero-name" style="font-family:'Outfit',sans-serif;font-size:3.8rem;font-weight:900;line-height:1.1;margin-bottom:14px;letter-spacing:-0.02em;">
+      Md. <span class="grad-cyan">Sohag</span> Ali<span class="blink" style="color:var(--cyan);">_</span>
+    </h1>
+
+    <p style="font-family:'Space Mono',monospace;font-size:0.85rem;color:var(--text-muted);letter-spacing:0.08em;margin-bottom:8px;">
+      BSc. CSE · Chandpur Science &amp; Technology University
+    </p>
+    <p style="font-size:1.05rem;color:var(--text-mid);margin-bottom:32px;">
+      Competitive Programmer · 250+ Problems Solved · Aspiring Full-Stack Developer
+    </p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:40px;">
+      <a href="#projects" class="btn-cyan">View Projects ↓</a>
+      <a href="#oj" class="btn-ghost">My OJ Profiles</a>
+      <a href="https://github.com/Md-Sohag-ALi" target="_blank" class="btn-ghost">GitHub ↗</a>
+    </div>
+
+    <!-- Stats strip -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px;">
+      <div style="text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;font-family:'Space Mono',monospace;" class="grad-cyan">250+</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">Problems Solved</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;font-family:'Space Mono',monospace;" class="grad-fire">3.56</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">CGPA</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;font-family:'Space Mono',monospace;" class="grad-fire">5.00</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">HSC GPA</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;font-family:'Space Mono',monospace;" class="grad-cyan">2</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">Projects Done</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="max-width:1100px;margin:0 auto;padding:80px 24px;">
+  <div class="reveal two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;">
+    <div>
+      <div class="section-label" style="margin-bottom:16px;">About Me</div>
+      <h2 style="font-size:2.4rem;font-weight:800;line-height:1.2;margin-bottom:18px;">
+        A <span class="grad-full">Competitive Programmer</span><br>who loves to Build
+      </h2>
+      <p style="color:var(--text-mid);line-height:1.8;margin-bottom:12px;">
+        I'm Sohag — a CSE student from <strong style="color:#c8dde6;">Chandpur Science &amp; Technology University</strong> passionate about algorithms, data structures, and software development. I've solved <strong style="color:var(--cyan);">250+ problems</strong> across Codeforces, Beecrowd, LeetCode, CodeChef, and HackerRank.
+      </p>
+      <p style="color:var(--text-mid);line-height:1.8;margin-bottom:24px;">
+        On the web side, I build projects with HTML, CSS, Tailwind CSS and JavaScript. I'm now on a journey to master React, Django, and Machine Learning.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a href="https://github.com/Md-Sohag-ALi" target="_blank" class="btn-ghost" style="font-size:0.74rem;padding:8px 16px;">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/md-sohag-ali-a093a0348/" target="_blank" class="btn-ghost" style="font-size:0.74rem;padding:8px 16px;">LinkedIn ↗</a>
+        <a href="https://www.facebook.com/sk.sohag.khan.741673" target="_blank" class="btn-ghost" style="font-size:0.74rem;padding:8px 16px;">Facebook ↗</a>
+      </div>
+    </div>
+    <div class="four-col" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="card" style="padding:16px;">
+        <div style="font-size:1.3rem;margin-bottom:6px;">📍</div>
+        <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Location</div>
+        <div style="font-size:0.82rem;font-weight:600;line-height:1.5;">Sahapara, Shibgonj<br>Chapainawabgonj, Rajshahi</div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div style="font-size:1.3rem;margin-bottom:6px;">🎓</div>
+        <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">University</div>
+        <div style="font-size:0.82rem;font-weight:600;line-height:1.5;">CSTU, Chandpur<br>CGPA 3.56 / 4.00</div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div style="font-size:1.3rem;margin-bottom:6px;">📧</div>
+        <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Email</div>
+        <div style="font-size:0.78rem;font-weight:600;word-break:break-all;">sksohag0990@gmail.com</div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div style="font-size:1.3rem;margin-bottom:6px;">📱</div>
+        <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Phone</div>
+        <div style="font-size:0.82rem;font-weight:600;">+880 1799 844889</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:rgba(0,229,255,0.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 24px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label" style="justify-content:center;margin-bottom:12px;">Skills &amp; Expertise</div>
+      <h2 style="font-size:2.4rem;font-weight:800;">What I <span class="grad-cyan">Know</span> &amp; What's <span class="grad-fire">Coming</span></h2>
+    </div>
+
+    <div class="reveal two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;">
+      <!-- Lang bars -->
+      <div class="card" style="padding:1.6rem;">
+        <h3 style="font-family:'Space Mono',monospace;font-size:0.76rem;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;">⬡ Programming Languages</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div><div style="display:flex;justify-content:space-between;font-size:0.84rem;margin-bottom:5px;"><span>C / C++</span><span style="color:var(--cyan);font-family:'Space Mono',monospace;font-size:0.74rem;">Main Language</span></div><div class="prog-track"><div class="prog-fill" style="width:88%;"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:0.84rem;margin-bottom:5px;"><span>Java</span><span style="color:var(--cyan);font-family:'Space Mono',monospace;font-size:0.74rem;">Proficient</span></div><div class="prog-track"><div class="prog-fill" style="width:72%;"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:0.84rem;margin-bottom:5px;"><span>Python</span><span style="color:var(--cyan);font-family:'Space Mono',monospace;font-size:0.74rem;">Basic</span></div><div class="prog-track"><div class="prog-fill" style="width:50%;"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:0.84rem;margin-bottom:5px;"><span>JavaScript</span><span style="color:var(--cyan);font-family:'Space Mono',monospace;font-size:0.74rem;">Basic</span></div><div class="prog-track"><div class="prog-fill" style="width:48%;"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:0.84rem;margin-bottom:5px;"><span>SQL</span><span style="color:var(--cyan);font-family:'Space Mono',monospace;font-size:0.74rem;">Intermediate</span></div><div class="prog-track"><div class="prog-fill" style="width:65%;"></div></div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <div class="card" style="padding:1.4rem;">
+          <h3 style="font-family:'Space Mono',monospace;font-size:0.76rem;color:var(--pink);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">⬡ CS Fundamentals</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;">
+            <span class="chip">Data Structures</span>
+            <span class="chip">Algorithms</span>
+            <span class="chip">OOP</span>
+            <span class="chip">Problem Solving</span>
+            <span class="chip">SQL</span>
+          </div>
+        </div>
+        <div class="card" style="padding:1.4rem;">
+          <h3 style="font-family:'Space Mono',monospace;font-size:0.76rem;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">⬡ Web Technologies</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;">
+            <span class="chip">HTML5</span>
+            <span class="chip">CSS3</span>
+            <span class="chip">Tailwind CSS</span>
+            <span class="chip">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal card" style="padding:1.6rem;">
+      <h3 style="font-family:'Space Mono',monospace;font-size:0.76rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">⬡ Upcoming / Currently Learning</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+        <span class="chip chip-upcoming">⚛ React</span>
+        <span class="chip chip-upcoming">🐍 Django</span>
+        <span class="chip chip-upcoming">🤖 Machine Learning</span>
+        <span style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--text-muted);margin-left:4px;">— on the roadmap</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE JUDGES -->
+<section id="oj" style="max-width:1100px;margin:0 auto;padding:80px 24px;">
+  <div class="reveal" style="text-align:center;margin-bottom:48px;">
+    <div class="section-label" style="justify-content:center;margin-bottom:12px;">Competitive Programming</div>
+    <h2 style="font-size:2.4rem;font-weight:800;">OJ <span class="grad-cyan">Profiles</span></h2>
+    <p style="color:var(--text-muted);margin-top:8px;font-size:0.9rem;">250+ problems solved across all platforms</p>
+  </div>
+
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+    <a href="https://codeforces.com/profile/S_K_M_A" target="_blank" class="oj-card">
+      <div class="oj-icon" style="background:rgba(30,100,200,0.15);color:#4a9eff;font-size:0.85rem;">CF</div>
+      <div><div style="font-weight:700;font-size:0.92rem;color:#c8dde6;">Codeforces</div><div style="font-size:0.76rem;color:var(--text-muted);">S_K_M_A</div><div style="margin-top:4px;"><span style="font-family:'Space Mono',monospace;font-size:0.88rem;color:var(--cyan);font-weight:700;">100+</span><span style="font-size:0.7rem;color:var(--text-muted);margin-left:4px;">solved</span></div></div>
+    </a>
+    <a href="https://judge.beecrowd.com/en/profile/853520" target="_blank" class="oj-card">
+      <div class="oj-icon" style="background:rgba(0,180,100,0.12);color:#00cc70;font-size:0.75rem;">BEE</div>
+      <div><div style="font-weight:700;font-size:0.92rem;color:#c8dde6;">Beecrowd</div><div style="font-size:0.76rem;color:var(--text-muted);">#853520</div><div style="margin-top:4px;"><span style="font-family:'Space Mono',monospace;font-size:0.88rem;color:var(--cyan);font-weight:700;">100+</span><span style="font-size:0.7rem;color:var(--text-muted);margin-left:4px;">solved</span></div></div>
+    </a>
+    <a href="https://leetcode.com/u/S_K_M_A/" target="_blank" class="oj-card">
+      <div class="oj-icon" style="background:rgba(255,161,22,0.12);color:#FFA116;font-size:0.85rem;">LC</div>
+      <div><div style="font-weight:700;font-size:0.92rem;color:#c8dde6;">LeetCode</div><div style="font-size:0.76rem;color:var(--text-muted);">S_K_M_A</div><div style="margin-top:4px;"><span style="font-family:'Space Mono',monospace;font-size:0.88rem;color:var(--cyan);font-weight:700;">10+</span><span style="font-size:0.7rem;color:var(--text-muted);margin-left:4px;">solved</span></div></div>
+    </a>
+    <div class="oj-card" style="cursor:default;">
+      <div class="oj-icon" style="background:rgba(90,50,20,0.2);color:#c68642;font-size:0.85rem;">CC</div>
+      <div><div style="font-weight:700;font-size:0.92rem;color:#c8dde6;">CodeChef</div><div style="font-size:0.76rem;color:var(--text-muted);">Active</div><div style="margin-top:4px;"><span style="font-family:'Space Mono',monospace;font-size:0.88rem;color:var(--cyan);font-weight:700;">20+</span><span style="font-size:0.7rem;color:var(--text-muted);margin-left:4px;">solved</span></div></div>
+    </div>
+    <div class="oj-card" style="cursor:default;">
+      <div class="oj-icon" style="background:rgba(0,180,0,0.1);color:#00b300;font-size:0.85rem;">HR</div>
+      <div><div style="font-weight:700;font-size:0.92rem;color:#c8dde6;">HackerRank</div><div style="font-size:0.76rem;color:var(--text-muted);">Active</div><div style="margin-top:4px;"><span style="font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--cyan);font-weight:700;">Active</span></div></div>
+    </div>
+    <div class="oj-card" style="background:rgba(0,229,255,0.05);border-color:rgba(0,229,255,0.3);cursor:default;">
+      <div class="oj-icon" style="background:rgba(0,229,255,0.15);color:var(--cyan);font-size:1.1rem;">Σ</div>
+      <div><div style="font-weight:700;font-size:0.92rem;color:#c8dde6;">Total</div><div style="font-size:0.76rem;color:var(--text-muted);">All Platforms</div><div style="margin-top:4px;"><span style="font-family:'Space Mono',monospace;font-size:1rem;color:var(--cyan);font-weight:700;">250+</span><span style="font-size:0.7rem;color:var(--text-muted);margin-left:4px;">problems</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:rgba(255,77,109,0.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 24px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label" style="justify-content:center;margin-bottom:12px;">Projects</div>
+      <h2 style="font-size:2.4rem;font-weight:800;">Things I've <span class="grad-fire">Built</span></h2>
+    </div>
+    <div class="reveal three-col" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+      <div class="proj-card">
+        <div style="position:relative;overflow:hidden;aspect-ratio:16/9;">
+          <img src="food.png" alt="Food Delivery" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" class="proj-img">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(13,19,33,0.95));"></div>
+          <span style="position:absolute;top:10px;left:10px;padding:3px 10px;border-radius:4px;font-family:'Space Mono',monospace;font-size:0.68rem;font-weight:700;background:rgba(255,77,109,0.85);color:#fff;">Completed ✓</span>
+        </div>
+        <div style="padding:1.3rem;">
+          <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:7px;">🍔 Food Delivery App</h3>
+          <p style="color:var(--text-mid);font-size:0.82rem;line-height:1.7;margin-bottom:12px;">A complete food ordering app with menu browsing, cart management, and order flow — built as a real-world project.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;">
+            <span class="chip" style="font-size:0.68rem;padding:2px 8px;">HTML</span>
+            <span class="chip" style="font-size:0.68rem;padding:2px 8px;">CSS</span>
+            <span class="chip" style="font-size:0.68rem;padding:2px 8px;">JavaScript</span>
+          </div>
+          <a href="https://github.com/Md-Sohag-ALi" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 14px;">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div style="position:relative;overflow:hidden;aspect-ratio:16/9;">
+          <img src="culculator.png" alt="Calculator" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" class="proj-img">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(13,19,33,0.95));"></div>
+          <span style="position:absolute;top:10px;left:10px;padding:3px 10px;border-radius:4px;font-family:'Space Mono',monospace;font-size:0.68rem;font-weight:700;background:rgba(0,229,255,0.8);color:#000;">Completed ✓</span>
+        </div>
+        <div style="padding:1.3rem;">
+          <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:7px;">🔢 Calculator App</h3>
+          <p style="color:var(--text-mid);font-size:0.82rem;line-height:1.7;margin-bottom:12px;">A sleek, responsive calculator with standard arithmetic operations, built with clean Tailwind CSS styling.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;">
+            <span class="chip" style="font-size:0.68rem;padding:2px 8px;">HTML</span>
+            <span class="chip" style="font-size:0.68rem;padding:2px 8px;">Tailwind</span>
+            <span class="chip" style="font-size:0.68rem;padding:2px 8px;">JavaScript</span>
+          </div>
+          <a href="https://github.com/Md-Sohag-ALi" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 14px;">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="proj-card" style="border-style:dashed;border-color:rgba(0,229,255,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.5rem;text-align:center;min-height:300px;">
+        <div style="font-size:2.5rem;margin-bottom:12px;">🚀</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:var(--text-muted);margin-bottom:7px;">Next Project</h3>
+        <p style="color:var(--text-muted);font-size:0.8rem;line-height:1.6;">Something with React + Django is coming. Watch my GitHub!</p>
+        <div style="margin-top:14px;" class="chip chip-upcoming">In Progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION + HOBBIES + MUSIC -->
+<section id="education" style="max-width:1100px;margin:0 auto;padding:80px 24px;">
+  <div class="reveal" style="text-align:center;margin-bottom:48px;">
+    <div class="section-label" style="justify-content:center;margin-bottom:12px;">Education</div>
+    <h2 style="font-size:2.4rem;font-weight:800;">Academic <span class="grad-cyan">Journey</span></h2>
+  </div>
+
+  <div class="reveal two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+    <!-- Left: Education -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <!-- BSc -->
+      <div class="card" style="padding:1.4rem;border-color:rgba(0,229,255,0.25);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <div>
+            <div style="font-size:0.68rem;font-family:'Space Mono',monospace;color:var(--cyan);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">2026 — Present</div>
+            <div style="font-weight:700;font-size:0.98rem;">BSc. in Computer Science &amp; Engineering</div>
+            <div style="color:var(--text-muted);font-size:0.8rem;">Chandpur Science &amp; Technology University</div>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--cyan);font-weight:700;white-space:nowrap;">3.56</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+          <div style="background:rgba(0,229,255,0.04);border-radius:7px;padding:7px 9px;">
+            <div style="font-size:0.65rem;color:var(--text-muted);">Semester 1.1</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:0.88rem;color:#c8dde6;margin:2px 0;">3.46</div>
+            <div class="prog-track"><div class="prog-fill" style="width:86%;"></div></div>
+          </div>
+          <div style="background:rgba(0,229,255,0.04);border-radius:7px;padding:7px 9px;">
+            <div style="font-size:0.65rem;color:var(--text-muted);">Semester 1.2</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:0.88rem;color:#c8dde6;margin:2px 0;">3.26</div>
+            <div class="prog-track"><div class="prog-fill" style="width:81%;"></div></div>
+          </div>
+          <div style="background:rgba(0,229,255,0.04);border-radius:7px;padding:7px 9px;">
+            <div style="font-size:0.65rem;color:var(--text-muted);">Semester 2.1</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:0.88rem;color:#c8dde6;margin:2px 0;">3.74</div>
+            <div class="prog-track"><div class="prog-fill" style="width:93%;"></div></div>
+          </div>
+          <div style="background:rgba(0,229,255,0.04);border-radius:7px;padding:7px 9px;">
+            <div style="font-size:0.65rem;color:var(--text-muted);">Semester 2.2</div>
+            <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:0.88rem;color:#c8dde6;margin:2px 0;">3.80</div>
+            <div class="prog-track"><div class="prog-fill" style="width:95%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:1.2rem;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-size:0.66rem;font-family:'Space Mono',monospace;color:var(--pink);letter-spacing:0.08em;text-transform:uppercase;">2021 · Rajshahi Board</div><div style="font-weight:700;margin-top:3px;">HSC</div></div>
+        <div style="text-align:right;"><div style="font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;" class="grad-fire">5.00</div><div style="font-size:0.65rem;color:var(--text-muted);">Perfect Score</div></div>
+      </div>
+      <div class="card" style="padding:1.2rem;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-size:0.66rem;font-family:'Space Mono',monospace;color:var(--pink);letter-spacing:0.08em;text-transform:uppercase;">2019 · Rajshahi Board</div><div style="font-weight:700;margin-top:3px;">SSC</div></div>
+        <div style="text-align:right;"><div style="font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;" class="grad-fire">4.94</div></div>
+      </div>
+      <div class="card" style="padding:1.2rem;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-size:0.66rem;font-family:'Space Mono',monospace;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;">2016 · Rajshahi Board</div><div style="font-weight:700;margin-top:3px;">JSC</div></div>
+        <div style="text-align:right;"><div style="font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--cyan);">4.25</div></div>
+      </div>
+      <div class="card" style="padding:1.2rem;display:flex;justify-content:space-between;align-items:center;">
+        <div><div style="font-size:0.66rem;font-family:'Space Mono',monospace;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;">2013 · Rajshahi Board</div><div style="font-weight:700;margin-top:3px;">PSC</div></div>
+        <div style="text-align:right;"><div style="font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--cyan);">3.75</div></div>
+      </div>
+    </div>
+
+    <!-- Right: Hobbies + Music -->
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div class="card" style="padding:1.4rem;">
+        <h3 style="font-family:'Space Mono',monospace;font-size:0.76rem;color:var(--pink);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">⬡ Hobbies &amp; Interests</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+          <div class="hobby-card">
+            <div style="font-size:1.8rem;margin-bottom:5px;">🏏</div>
+            <div style="font-weight:700;font-size:0.87rem;">Cricket</div>
+            <div style="font-size:0.72rem;color:var(--pink);margin-top:2px;">My Emotion ❤️</div>
+          </div>
+          <div class="hobby-card">
+            <div style="font-size:1.8rem;margin-bottom:5px;">⚽</div>
+            <div style="font-weight:700;font-size:0.87rem;">Football</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:2px;">Love watching</div>
+          </div>
+          <div class="hobby-card">
+            <div style="font-size:1.8rem;margin-bottom:5px;">🏸</div>
+            <div style="font-weight:700;font-size:0.87rem;">Badminton</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:2px;">Active player</div>
+          </div>
+          <div class="hobby-card">
+            <div style="font-size:1.8rem;margin-bottom:5px;">🎯</div>
+            <div style="font-weight:700;font-size:0.87rem;">Carrom</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:2px;">Board game</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:1.4rem;">
+        <h3 style="font-family:'Space Mono',monospace;font-size:0.76rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">⬡ Music I Love 🎵</h3>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div style="display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.1);">
+            <span style="font-size:1.3rem;">🎸</span>
+            <div><div style="font-weight:600;font-size:0.86rem;">Shironamhin</div><div style="font-size:0.72rem;color:var(--text-muted);">Bangladeshi Rock Band</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.1);">
+            <span style="font-size:1.3rem;">🎵</span>
+            <div><div style="font-weight:600;font-size:0.86rem;">Artcell</div><div style="font-size:0.72rem;color:var(--text-muted);">Bangladeshi Progressive Rock</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.1);">
+            <span style="font-size:1.3rem;">🎤</span>
+            <div><div style="font-weight:600;font-size:0.86rem;">Arijit Singh</div><div style="font-size:0.72rem;color:var(--text-muted);">Bollywood Playback Singer</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:rgba(0,229,255,0.02);border-top:1px solid var(--border);padding:80px 24px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label" style="justify-content:center;margin-bottom:12px;">Contact</div>
+      <h2 style="font-size:2.4rem;font-weight:800;">Let's <span class="grad-cyan">Connect</span></h2>
+      <p style="color:var(--text-muted);margin-top:8px;">Have a project idea or want to collaborate? Reach out!</p>
+    </div>
+
+    <div class="reveal two-col" style="display:grid;grid-template-columns:1fr 1.5fr;gap:20px;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="mailto:sksohag0990@gmail.com" class="oj-card">
+          <div class="oj-icon" style="background:rgba(255,77,109,0.12);color:var(--pink);">📧</div>
+          <div><div style="font-size:0.66rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Email</div><div style="font-weight:600;font-size:0.82rem;">sksohag0990@gmail.com</div></div>
+        </a>
+        <a href="tel:+8801799844889" class="oj-card">
+          <div class="oj-icon" style="background:rgba(0,229,255,0.1);color:var(--cyan);">📱</div>
+          <div><div style="font-size:0.66rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Phone</div><div style="font-weight:600;font-size:0.82rem;">+880 1799 844889</div></div>
+        </a>
+        <div class="oj-card" style="cursor:default;">
+          <div class="oj-icon" style="background:rgba(255,215,0,0.1);color:var(--gold);">📍</div>
+          <div><div style="font-size:0.66rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Address</div><div style="font-weight:600;font-size:0.8rem;line-height:1.5;">Sahapara, Shibgonj, Chapainawabgonj<br>Rajshahi, Bangladesh</div></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:4px;">
+          <a href="https://github.com/Md-Sohag-ALi" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 12px;">GitHub</a>
+          <a href="https://www.linkedin.com/in/md-sohag-ali-a093a0348/" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 12px;">LinkedIn</a>
+          <a href="https://www.facebook.com/sk.sohag.khan.741673" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 12px;">Facebook</a>
+          <a href="https://codeforces.com/profile/S_K_M_A" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 12px;">Codeforces</a>
+          <a href="https://leetcode.com/u/S_K_M_A/" target="_blank" class="btn-ghost" style="font-size:0.7rem;padding:6px 12px;">LeetCode</a>
+        </div>
+      </div>
+
+      <div class="card" style="padding:1.8rem;">
+       <form action="https://formspree.io/f/xjgjzjwy" method="POST">
+  <input type="text" name="name" placeholder="Your name" class="form-input" required>
+  <input type="email" name="email" placeholder="Your email" class="form-input" required>
+  <textarea name="message" placeholder="Your message" class="form-input" required></textarea>
+  <button type="submit" class="btn-cyan w-full">Send Message</button>
+</form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer style="position:relative;z-index:2;border-top:1px solid var(--border);padding:28px 24px;text-align:center;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="font-family:'Space Mono',monospace;font-size:0.95rem;margin-bottom:6px;">
+      <span style="color:var(--text-muted);">&lt;</span><span class="grad-cyan">Md.Sohag.Ali</span><span style="color:var(--pink);">/</span><span style="color:var(--text-muted);">&gt;</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.75rem;">Built with HTML · Tailwind CSS · Love · <span style="font-family:'Space Mono',monospace;color:var(--cyan);">© 2026</span></p>
+    <p style="color:#1a2a35;font-size:0.68rem;margin-top:4px;font-family:'Space Mono',monospace;">Chapainawabgonj → Chandpur → 🌐</p>
+  </div>
+</footer>
+
+<script>
+  // Cursor glow
+  const glow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 50); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = '✓ Sent!';
+    btn.style.background = '#00cc70';
+    btn.style.boxShadow = '0 0 30px rgba(0,204,112,0.4)';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.boxShadow = ''; e.target.reset(); }, 3000);
+  }
+
+  // Project image zoom
+  document.querySelectorAll('.proj-img').forEach(img => {
+    const card = img.closest('.proj-card');
+    card.addEventListener('mouseenter', () => img.style.transform = 'scale(1.07)');
+    card.addEventListener('mouseleave', () => img.style.transform = 'scale(1)');
+  });
+
+  // Navbar hide/show on scroll
+  let lastY = 0;
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    navbar.style.transform = (y > lastY && y > 100) ? 'translateY(-100%)' : 'translateY(0)';
+    lastY = y;
+  });
+</script>
+</body>
+</html>
