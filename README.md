@@ -1,5 +1,10 @@
 # 📚 Learning Progress
 
+✍️ **Author:** Sk Sohag Khan  
+🎓 CSE Student | Future Full Stack Developer 🚀
+
+---
+
 ## 📅 Week 1
 
 ---
@@ -20,13 +25,9 @@
 #### 📂 Project Structure Analysis
 
 * **manage.py** – Command-line utility
-
 * **settings.py** – Configuration
-
 * **urls.py** – Routing
-
 * **asgi.py & wsgi.py** – Deployment
-
 * SQLite database (`db.sqlite3`) created automatically
 
 #### ▶️ Execution
@@ -175,102 +176,103 @@ Completed HTML (Level 1 → Pro)
 
 #### 🎯 Outcome
 
-✅ Built complete HTML page
+✅ Built complete HTML page  
 ✅ Strong foundation in HTML
 
 </details>
 
 ---
 
-## 🔹 Day 05
+### 🔹 Day 05
+
 <details>
-<summary>▶ View Details</summary>
+<summary>View Details</summary>
 
-### 📌 Topics Covered
+### 📅 Day 05 Progress – CSS Learning
 
-#### 🎯 CSS Selectors
-- Universal Selector (`*`)
-- ID Selector (`#box`)
-- Class Selector (`.heading`)
+#### 📚 Topics Covered
 
-#### 🎯 Text Properties
-- Text decoration (underline)
-- Font weight (bold)
-- Line height
-- Text transform (capitalize)
+##### 🎯 CSS Selectors
+* Universal Selector (`*`)
+* ID Selector (`#box`)
+* Class Selector (`.heading`)
 
-#### 🎯 Box Model
-- Width & Height
-- Padding & Margin
-- Border & Border-radius
+##### 🎯 Text Properties
+* Text decoration (underline)
+* Font weight (bold)
+* Line height
+* Text transform (capitalize)
 
-#### 🎯 Display Property
-- Inline
-- Block
-- None
+##### 🎯 Box Model
+* Width & Height
+* Padding & Margin
+* Border & Border-radius
 
-#### 🎯 Opacity
-- RGBA color transparency
+##### 🎯 Display Property
+* Inline
+* Block
+* None
 
-#### 🎯 Positioning
-- Relative Position
-- Absolute Position
-- Top, Left properties
+##### 🎯 Opacity
+* RGBA color transparency
 
-#### 🎯 Z-index
-- Layer control using z-index
+##### 🎯 Positioning
+* Relative Position
+* Absolute Position
+* Top, Left properties
 
-#### 🎯 Flexbox
-- `display: flex`
-- `justify-content`
-- `align-items`
+##### 🎯 Z-index
+* Layer control using z-index
 
-#### 🎯 Background
-- Background Image
-- Background Size (cover)
+##### 🎯 Flexbox
+* `display: flex`
+* `justify-content`
+* `align-items`
 
-#### 🎯 Transition
-- Smooth hover effect
-- Transform (scale)
+##### 🎯 Background
+* Background Image
+* Background Size (cover)
 
-#### 🎯 Animation
-- `@keyframes`
-- Infinite rotation (Loader)
+##### 🎯 Transition
+* Smooth hover effect
+* Transform (scale)
 
-#### 🎯 Media Queries (Responsive Design)
-- Different screen sizes:
-  - max-width: 300px
-  - 300px–400px
-  - 400px–600px
-  - 600px+
+##### 🎯 Animation
+* `@keyframes`
+* Infinite rotation (Loader)
+
+##### 🎯 Media Queries (Responsive Design)
+* Different screen sizes:
+  * max-width: 300px
+  * 300px–400px
+  * 400px–600px
+  * 600px+
 
 </details>
 
 ---
+
 ### 🔹 Day 06
+
 <details>
-<summary>▶ View Details</summary>
+<summary>View Details</summary>
 
-#### 📘 Python Learning
-This repository contains my Python learning practice organized by topics.
+### 📅 Day 06 Progress – Python Learning
 
----
+#### 📂 Project Files
 
-#### 📁 Project Files
-- firstProgramme.py
-- printSum.py
-- Variables.py
-- DataType.py
-- TypeConversion.py
-- Input in python.py
-- Arithmetic operators.py
-- String and conditional statements.py
-- List in Python.py
-- Tuple in python.py
-- Dictionary and Set in python.py
-- Practice.py
-
----
+* firstProgramme.py
+* printSum.py
+* Variables.py
+* DataType.py
+* TypeConversion.py
+* Input in python.py
+* Arithmetic operators.py
+* String and conditional statements.py
+* List in Python.py
+* Tuple in python.py
+* Dictionary and Set in python.py
+* Practice.py
 
 #### 📚 Topics Covered
 
@@ -279,61 +281,61 @@ This repository contains my Python learning practice organized by topics.
 print("Hello World")
 ```
 
-- Variables & Data Types  
-- Type Conversion  
-- Input Handling  
-- Operators  
-- String & Conditionals  
-- List, Tuple, Dictionary, Set  
+* Variables & Data Types
+* Type Conversion
+* Input Handling
+* Operators
+* String & Conditionals
+* List, Tuple, Dictionary, Set
 
 </details>
 
 ---
 
 ### 🔹 Day 07
+
 <details>
-<summary>▶ View Details</summary>
+<summary>View Details</summary>
 
-#### 📁 Files
-- ExceptionHandling.py  
-- File Basic.py  
-- File_handling.py  
-- Function.py  
+### 📅 Day 07 Progress – Python Advanced
 
----
+#### 📂 Files
+
+* ExceptionHandling.py
+* File Basic.py
+* File_handling.py
+* Function.py
 
 #### 📚 Topics Covered
 
 **🔸 Function**
-- Function definition (`def`)
-- Parameters & arguments
-- Return values
+* Function definition (`def`)
+* Parameters & arguments
+* Return values
 
 **🔸 File Handling**
-- open(), read(), write()
-- File modes (`r`, `w`, `a`)
-- with open() (best practice)
+* open(), read(), write()
+* File modes (`r`, `w`, `a`)
+* with open() (best practice)
 
 **🔸 Exception Handling**
-- try-except block
-- Multiple exceptions
-- Common errors:
-  - ZeroDivisionError
-  - IndexError
-  - FileNotFoundError
-  - ValueError
-- General exception (`Exception as e`)
-
----
+* try-except block
+* Multiple exceptions
+* Common errors:
+  * ZeroDivisionError
+  * IndexError
+  * FileNotFoundError
+  * ValueError
+* General exception (`Exception as e`)
 
 #### 🧠 Practice
-- Function তৈরি ও ব্যবহার  
-- File read/write করা  
-- Error handle করা  
 
----
+* Function তৈরি ও ব্যবহার
+* File read/write করা
+* Error handle করা
 
 #### 🚀 Conclusion
+
 Today I learned how to write **clean, structured, and error-free Python programs**.
 
 </details>
@@ -342,116 +344,119 @@ Today I learned how to write **clean, structured, and error-free Python programs
 
 ## 📅 Week 2
 
+---
+
 ### 🔹 Day 01
 
----
 <details>
 <summary>View Details</summary>
 
-### 📚 Topics Learned
+### 📅 Day 01 Progress – OOP in Python
 
-#### 🧱 OOP Core Practice
-- Class & Object implementation
-- Constructor (`__init__`) and string representation (`__str__`)
-- Updating object attributes using methods
+#### 📚 Topics Learned
 
-#### 🔢 Custom Class Example
-- Fraction class with:
-  - Validation (denominator ≠ 0)
-  - Simplification using `math.gcd()`
-  - Operator overloading (`__add__`)
+##### 🧱 OOP Core Practice
+* Class & Object implementation
+* Constructor (`__init__`) and string representation (`__str__`)
+* Updating object attributes using methods
 
-#### ⚙️ Special Methods (Dunder Methods)
-- `__init__()` → Object initialization
-- `__str__()` → Human-readable output
-- `__add__()` → Operator overloading
+##### 🔢 Custom Class Example
+* Fraction class with:
+  * Validation (denominator ≠ 0)
+  * Simplification using `math.gcd()`
+  * Operator overloading (`__add__`)
 
-#### 🏷️ Class Method & Static Method
-- `@classmethod` → Access class variables
-- `@staticmethod` → Utility method without class/object access
+##### ⚙️ Special Methods (Dunder Methods)
+* `__init__()` → Object initialization
+* `__str__()` → Human-readable output
+* `__add__()` → Operator overloading
 
----
-
-### 🧬 Inheritance Types
-
-- ✅ Single Inheritance  
-- ✅ Multiple Inheritance  
-- ✅ Multilevel Inheritance  
-- ✅ Hierarchical Inheritance  
-- ✅ Hybrid Inheritance  
+##### 🏷️ Class Method & Static Method
+* `@classmethod` → Access class variables
+* `@staticmethod` → Utility method without class/object access
 
 ---
 
-### 🔁 Polymorphism
-- Same method name, different behavior
-- Example: `make_sound()` for different animals
+#### 🧬 Inheritance Types
+
+* ✅ Single Inheritance
+* ✅ Multiple Inheritance
+* ✅ Multilevel Inheritance
+* ✅ Hierarchical Inheritance
+* ✅ Hybrid Inheritance
 
 ---
 
-### ➕ Method Concepts
-- Method Overloading (default arguments)
-- Method Overriding (same method in child class)
+#### 🔁 Polymorphism
+* Same method name, different behavior
+* Example: `make_sound()` for different animals
 
 ---
 
-### 🔒 Encapsulation
-- Private variable using `__balance`
-- Controlled access via methods
+#### ➕ Method Concepts
+* Method Overloading (default arguments)
+* Method Overriding (same method in child class)
 
 ---
 
-### 🎭 Abstraction
-- Abstract Base Class using `abc`
-- `@abstractmethod` enforcement
+#### 🔒 Encapsulation
+* Private variable using `__balance`
+* Controlled access via methods
 
 ---
 
-### 🔌 Interface (Python Style)
-- Implemented using abstract classes
-- Only method definitions, no implementation
+#### 🎭 Abstraction
+* Abstract Base Class using `abc`
+* `@abstractmethod` enforcement
 
 ---
 
-### 🏗️ Design Patterns
-
-#### 1️⃣ Singleton Pattern
-- Ensures only one instance exists
-
-#### 2️⃣ Factory Pattern
-- Creates objects based on input
-
-#### 3️⃣ Builder Pattern
-- Step-by-step object creation (method chaining)
+#### 🔌 Interface (Python Style)
+* Implemented using abstract classes
+* Only method definitions, no implementation
 
 ---
 
-### 💡 Key Takeaways
+#### 🏗️ Design Patterns
 
-- Strong understanding of OOP concepts
-- Learned real-world class design
-- Practiced inheritance & polymorphism deeply
-- Explored design patterns for scalable code
+**1️⃣ Singleton Pattern**
+* Ensures only one instance exists
+
+**2️⃣ Factory Pattern**
+* Creates objects based on input
+
+**3️⃣ Builder Pattern**
+* Step-by-step object creation (method chaining)
 
 ---
 
-### 🚀 Practice Outcome
+#### 💡 Key Takeaways
 
-- Built multiple classes with real logic
-- Implemented operator overloading
-- Designed reusable and maintainable code structures
+* Strong understanding of OOP concepts
+* Learned real-world class design
+* Practiced inheritance & polymorphism deeply
+* Explored design patterns for scalable code
+
+---
+
+#### 🚀 Practice Outcome
+
+* Built multiple classes with real logic
+* Implemented operator overloading
+* Designed reusable and maintainable code structures
 
 </details>
 
-🔹 Day 02
-
-<details>
-<summary>▶ View Details</summary>
-
-### 🕒 Date & Time in Python
-
 ---
 
-#### 💻 Code
+### 🔹 Day 02
+
+<details>
+<summary>View Details</summary>
+
+### 📅 Day 02 Progress – Date/Time, JSON & API
+
+#### 🕒 Date & Time in Python
 
 ```python
 import datetime
@@ -464,7 +469,7 @@ print(now)
 print(today)
 
 # Custom Date
-custom_date = datetime.datetime(2026,4,15,4,59,0)
+custom_date = datetime.datetime(2026, 4, 15, 4, 59, 0)
 print(custom_date, type(custom_date))
 
 # Datetime → String
@@ -474,44 +479,28 @@ d3 = today.strftime("%d,%b,%Y %H:%M:%S")
 d4 = today.strftime("%d,%b,%Y -%A %H:%M:%S")
 d5 = today.strftime("%d,%b,%Y -%a %I:%M:%S %p")
 
-print(d1)
-print(d2)
-print(d3)
-print(d4)
-print(d5)
-print(type(d5))
-
 # String → Datetime
 date_str = "15,Apr,2026 -Wed 05:23:09 PM"
-date_obj = datetime.datetime.strptime(date_str,"%d,%b,%Y -%a %I:%M:%S %p")
+date_obj = datetime.datetime.strptime(date_str, "%d,%b,%Y -%a %I:%M:%S %p")
 print(date_obj, type(date_obj))
 
 # Date Arithmetic
 from datetime import timedelta
 
-today = datetime.datetime.today()
-
 tommorow = today + timedelta(days=1)
 yesterday = today - timedelta(days=1)
 test = today + timedelta(hours=5)
 
-print(tommorow)
-print(yesterday)
-print(test)
-
 present = datetime.datetime.strptime("20 Apr 2026", "%d %b %Y")
-prev = datetime.datetime.strptime("10 Apr 2026","%d %b %Y")
-
+prev = datetime.datetime.strptime("10 Apr 2026", "%d %b %Y")
 print(present - prev)
 ```
 
 ---
 
-### 🌐 JSON & API (Python)
+#### 🌐 JSON & API in Python
 
----
-
-### 📁 Files
+##### 📁 Files
 
 * datetime.py
 * json_basics.py
@@ -524,9 +513,7 @@ print(present - prev)
 * api_delete.py
 * api_data_handling.py
 
----
-
-### 📚 Topics
+##### 📚 Topics
 
 * Date & Time in Python
 * JSON (JavaScript Object Notation)
@@ -536,59 +523,52 @@ print(present - prev)
 
 ---
 
-### 💻 Code (API)
+##### 💻 Code Examples
 
-#### 🔹 Serialization
-
+**🔹 Serialization**
 ```python
 import json
-data = {"user_id":123,"post":"Hello","edit":True}
+data = {"user_id": 123, "post": "Hello", "edit": True}
 print(json.dumps(data, indent=4))
 ```
 
-#### 🔹 Deserialization
-
+**🔹 Deserialization**
 ```python
 json_string = '{"user_id":123,"post":"Hello","edit":true}'
 print(json.loads(json_string))
 ```
 
-#### 🔹 GET
-
+**🔹 GET**
 ```python
 import requests
 print(requests.get("https://jsonplaceholder.typicode.com/posts").json())
 ```
 
-#### 🔹 POST
-
+**🔹 POST**
 ```python
-value = {"userId":1,"id":101,"title":"test","body":"test"}
+value = {"userId": 1, "id": 101, "title": "test", "body": "test"}
 print(requests.post("https://jsonplaceholder.typicode.com/posts", value).json())
 ```
 
-#### 🔹 PATCH
-
+**🔹 PATCH**
 ```python
-print(requests.patch("https://jsonplaceholder.typicode.com/posts/1", {"title":"test"}).json())
+print(requests.patch("https://jsonplaceholder.typicode.com/posts/1", {"title": "test"}).json())
 ```
 
-#### 🔹 PUT
-
+**🔹 PUT**
 ```python
-value = {"userId":1,"id":101,"title":"test","body":"test"}
+value = {"userId": 1, "id": 101, "title": "test", "body": "test"}
 print(requests.put("https://jsonplaceholder.typicode.com/posts/1", value).json())
 ```
 
-#### 🔹 DELETE
-
+**🔹 DELETE**
 ```python
 print(requests.delete("https://jsonplaceholder.typicode.com/posts/1").json())
 ```
 
 ---
 
-### 🎯 Conclusion
+#### 🎯 Conclusion
 
 * Learned Date & Time handling
 * Practiced JSON conversion
@@ -598,17 +578,18 @@ print(requests.delete("https://jsonplaceholder.typicode.com/posts/1").json())
 
 ---
 
-🔹 Day 03 – JavaScript Practice
+### 🔹 Day 03
 
 <details>
-<summary>▶ View Details</summary>
+<summary>View Details</summary>
+
+### 📅 Day 03 Progress – JavaScript Practice
 
 📘 Today I practiced JavaScript basics, arrays, functions, objects, and DOM manipulation.
 
 ---
 
-<details>
-<summary>💎 JavaScript Basics</summary>
+#### 💎 JavaScript Basics
 
 * `console.log()` usage
 * Variables (`let`, `const`)
@@ -620,12 +601,9 @@ let num = 1212;
 let y = 1234567890123456789n;
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 Operators & Conditions</summary>
+#### 💎 Operators & Conditions
 
 ```js
 if (c == 10) {
@@ -633,12 +611,9 @@ if (c == 10) {
 }
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 Loops</summary>
+#### 💎 Loops
 
 ```js
 for (let color of colors) {
@@ -646,24 +621,18 @@ for (let color of colors) {
 }
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 Arrays & Methods</summary>
+#### 💎 Arrays & Methods
 
 ```js
-const names = ["raj","Taj"];
+const names = ["raj", "Taj"];
 const newNames = names.map(item => item + "___");
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 Functions</summary>
+#### 💎 Functions
 
 ```js
 const greet = () => {
@@ -671,12 +640,9 @@ const greet = () => {
 };
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 Objects</summary>
+#### 💎 Objects
 
 ```js
 const person = {
@@ -685,41 +651,33 @@ const person = {
 };
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 DOM Manipulation</summary>
+#### 💎 DOM Manipulation
 
 ```js
 const el = document.getElementById("lalala");
 el.textContent = "Changed Text";
 ```
 
-</details>
-
 ---
 
-<details>
-<summary>💎 Events</summary>
+#### 💎 Events
 
 ```js
 button.addEventListener("mouseover", colorBG);
 ```
 
-</details>
-
 ---
 
-## 🚀 Mini Project
+#### 🚀 Mini Project
 
 * Button hover → text change
 * DOM manipulation practice
 
 ---
 
-## ⚠️ Challenges Faced
+#### ⚠️ Challenges Faced
 
 * `document is not defined`
 * DOM confusion
@@ -727,65 +685,80 @@ button.addEventListener("mouseover", colorBG);
 
 ---
 
-## ✅ Conclusion
+#### ✅ Conclusion
 
 * Learned JS fundamentals
 * Practiced DOM
 
 ---
 
-📌 Next Goal:
-➡️ DOM advanced
+📌 **Next Goal:**
+➡️ DOM advanced  
 ➡️ Small projects
 
 </details>
 
-🔹 Day 04 – Tailwind CSS Basics
+---
+
+### 🔹 Day 04
 
 <details>
-<summary>▶ Click to Expand</summary>
+<summary>View Details</summary>
 
-## 📌 What I Learned Today
+### 📅 Day 04 Progress – Tailwind CSS
+
+#### 📌 What I Learned Today
 
 Today I explored **Tailwind CSS** and learned how utility-first CSS works with real examples.
 
 ---
 
-## 🔹 1. Tailwind Setup
+#### 🔹 Tailwind Setup
 
-### 📁 Files Used
-- `index.html`
-- `style.css`
-- `style.out.css`
+##### 📁 Files Used
+* `index.html`
+* `style.css`
+* `style.out.css`
 
-### 💻 Tailwind Import
+##### 💻 Tailwind Import
 
 ```css
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+```
+
+#### 🎯 What I Learned
+
+* Utility-first CSS approach
+* Tailwind configuration and setup
+* Responsive design with Tailwind classes
+* Dark mode variant configuration
+
+#### ✅ Outcome
+
+✅ Set up Tailwind CSS project  
+✅ Built responsive UI components with utility classes
+
 </details>
+
 ---
-## 🔹 Day 05 🚀
+
+### 🔹 Day 05
 
 <details>
-<summary>▶ View Details</summary>
+<summary>View Details</summary>
 
-- Successfully deployed my portfolio website using Netlify 🌍  
-- Integrated contact form using Formspree 📧  
-- Fixed UI issues and improved design consistency 🎨  
-- Made the website fully responsive 📱  
-- Shared my portfolio on LinkedIn 💼  
+### 📅 Day 05 Progress – Portfolio Deployment 🚀
+
+* Successfully deployed my portfolio website using Netlify 🌍
+* Integrated contact form using Formspree 📧
+* Fixed UI issues and improved design consistency 🎨
+* Made the website fully responsive 📱
+* Shared my portfolio on LinkedIn 💼
 
 🔗 **Live Website:**  
 https://sksohagkhan-portfolio.netlify.app/
+
 </details>
 
 ---
-
-
-
-
-✍️ **Author:** Sk Sohag Khan  
-🎓 CSE Student | Future Full Stack Developer 🚀
-
-
