@@ -800,3 +800,74 @@ myclosure(); // 10
 </details>
 
 <hr>
+
+<h3>🔹 Day 07</h3>
+
+<details>
+  <summary>▶ View Details</summary>
+
+  <p>📘 Today I built a simple Todo App using HTML, Tailwind CSS, and JavaScript.</p>
+
+  <ul>
+    <li>Add new tasks dynamically</li>
+    <li>Display tasks in UI</li>
+    <li>Clear input after adding</li>
+    <li>Basic UI with Tailwind CSS</li>
+  </ul>
+
+  <pre><code>
+// Add Task Function
+const formSubmitHandler = (event) => {
+  event.preventDefault();
+
+  const inputText = todoInput.value;
+
+  const task = `
+    &lt;div class="task"&gt;
+      &lt;span&gt;${inputText}&lt;/span&gt;
+    &lt;/div&gt;
+  `;
+
+  todoList.innerHTML = task + todoList.innerHTML;
+  todoInput.value = "";
+};
+  </code></pre>
+
+</details>
+
+
+<hr>
+
+<h2>📅 Week 3</h2>
+
+<hr>
+<h3>🔹 Day 01</h3>
+
+<details>
+  <summary>▶ View Details</summary>
+
+  <p>📘 Today I learned API and REST API concepts and built a dynamic product list using Fetch API.</p>
+
+  <ul>
+    <li>What is API and REST API</li>
+    <li>Using Fetch API to get data</li>
+    <li>Working with JSON data</li>
+    <li>Dynamic UI rendering using JavaScript</li>
+    <li>Looping through API data (forEach)</li>
+  </ul>
+
+  <pre><code>
+// Fetch API Example
+fetch('https://fakestoreapi.com/products')
+  .then(res => res.json())
+  .then(data => {
+    data.forEach(product => {
+      console.log(product.title);
+    });
+  });
+  </code></pre>
+
+</details>
+
+<hr>
+
