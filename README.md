@@ -762,3 +762,41 @@ https://sksohagkhan-portfolio.netlify.app/
 </details>
 
 ---
+
+<h3>🔹 Day 06</h3>
+
+<details>
+  <summary>▶ View Details</summary>
+
+  <p>📘 Today I practiced advanced JavaScript concepts:</p>
+
+  <ul>
+    <li>Template Literals</li>
+    <li>Destructuring (Array & Object)</li>
+    <li>Spread Operator (...)</li>
+    <li>Callback Functions</li>
+    <li>Array Reduce()</li>
+    <li>Promises (then, catch, finally)</li>
+    <li>Fetch API (GitHub User Data)</li>
+    <li>Scope & Closure</li>
+  </ul>
+
+  <pre><code>
+// Example: Closure
+function outerFun(){
+  let outervariable = 10;
+
+  function innerFun() {
+    console.log(outervariable);
+  }
+
+  return innerFun;
+}
+
+const myclosure = outerFun();
+myclosure(); // 10
+  </code></pre>
+
+</details>
+
+<hr>
