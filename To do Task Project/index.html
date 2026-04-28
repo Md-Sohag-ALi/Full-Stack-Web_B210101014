@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-200">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+  <div class="bg-white w-[320px] rounded-2xl shadow-xl overflow-hidden">
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center py-6">
+      <h1 class="text-xl font-semibold">My Tasks</h1>
+      <p class="text-sm opacity-80">Stay organized, stay productive</p>
+    </div>
+    <!-- Form Input -->
+    <form class="p-4" id="todo-form">
+      <div class="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
+        <input 
+          type="text" 
+          id="todo-input"
+          placeholder="What needs to be done?"
+          class="flex-1 bg-transparent outline-none text-sm"
+          required
+        >
+        <button 
+          type="submit"
+          class="bg-gradient-to-r from-blue-500 to-purple-600 text-white w-8 h-8 rounded-lg flex items-center justify-center text-lg"
+        >
+          +
+        </button>
+      </div>
+    </form>
+
+    <!-- Task List -->
+    <div id="task-list" class="px-4 space-y-3">
+
+      <!-- Example Task -->
+      <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" class="accent-purple-600">
+          <span class="text-sm">Complete the assignment</span>
+        </div>
+        <button class="text-gray-400 hover:text-red-500">🗑</button>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="flex justify-between items-center px-4 py-4 text-sm text-gray-500">
+      <span>Total tasks: <span id="task-count" class="text-purple-600">1</span></span>
+      <button class="text-blue-500 hover:underline">Clear completed</button>
+    </div>
+
+  </div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
