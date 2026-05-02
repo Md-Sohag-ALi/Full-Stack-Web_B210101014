@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Book list Page
+{% endblock %}
+
+
+{% block content %}
+<h2>All Book List</h2>
+<ul>
+  
+
+</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th >#ID</th>
+      <th >Book Title</th>
+      <th >Book Author</th>
+      <th >Action</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for book in object_list %}
+    <tr>
+      <td>{{book.id}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.author}}</td>
+      <td>
+        <a class ="btn btn-warning" href="{% url 'book-update' book.id %}">Edit</a>
+        <a class ="btn btn-danger" href="{% url 'book-delete' book.id %}">Delete</a>
+      </td>
+    </tr>
+   {% endfor %}
+   
+
+  </tbody>
+</table>
+{% endblock %}

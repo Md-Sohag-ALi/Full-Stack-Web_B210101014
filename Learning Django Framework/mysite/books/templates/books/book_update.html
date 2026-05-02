@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Book Update Page
+{% endblock %}
+
+
+{% block content %}
+<h2>Book  Update Form - Book Name {{object.title}}</h2>
+<!-- <form method="post">
+    {%csrf_token %}
+    {{form.as_p}}
+    <button class ="btn btn-primary">Submit</button>
+</form> -->
+{%include 'form_template.html' %} 
+{% endblock %}
