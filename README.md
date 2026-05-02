@@ -870,4 +870,113 @@ fetch('https://fakestoreapi.com/products')
 </details>
 
 <hr>
+<h3>🔹 Day 02</h3>
+
+<details>
+  <summary>▶ View Details</summary>
+
+  <p>📘 Today I worked on Django project structure, apps, and basic CRUD functionality.</p>
+
+  <ul>
+    <li>Understanding Django project & app structure</li>
+    <li>Created multiple apps (first_app, students)</li>
+    <li>Worked with models and migrations</li>
+    <li>Implemented CRUD operations (Create, List, Delete)</li>
+    <li>Used templates and template inheritance</li>
+    <li>Configured static and media files</li>
+  </ul>
+
+  <pre><code>
+// Example: Student List View
+from django.shortcuts import render
+from .models import Student
+
+def student_list(request):
+    students = Student.objects.all()
+    return render(request, 'students/student_list.html', {'students': students})
+  </code></pre>
+
+  <pre><code>
+// Example: URL configuration
+from django.urls import path
+from .views import student_list
+
+urlpatterns = [
+    path('', student_list, name='student_list'),
+]
+  </code></pre>
+
+</details>
+
+<hr>
+
+<h3>🔹 Day 03</h3>
+
+<details>
+  <summary>▶ View Details</summary>
+
+  <p>📘 Today I implemented full CRUD functionality using Django Class-Based Views (CBV) and improved project structure with reusable templates.</p>
+
+  <ul>
+    <li>Learned and applied Django Class-Based Views (CBV)</li>
+    <li>Implemented <strong>ListView</strong> to display all books</li>
+    <li>Implemented <strong>CreateView</strong> using a reusable form template</li>
+    <li>Implemented <strong>UpdateView</strong> for editing book data</li>
+    <li>Implemented <strong>DeleteView</strong> with confirmation page</li>
+    <li>Used dynamic URL routing with <code>&lt;int:pk&gt;</code></li>
+    <li>Structured templates using <code>base.html</code> and <code>navbar.html</code></li>
+    <li>Reused <code>form_template.html</code> for both Create & Update operations</li>
+  </ul>
+
+  <pre><code>
+// views.py (Class-Based Views)
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .models import Book
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'books/book_list.html'
+
+class BookCreateView(CreateView):
+    model = Book
+    fields = '__all__'
+    template_name = 'books/form_template.html'
+    success_url = '/'
+
+class BookUpdateView(UpdateView):
+    model = Book
+    fields = '__all__'
+    template_name = 'books/form_template.html'
+    success_url = '/'
+
+class BookDeleteView(DeleteView):
+    model = Book
+    template_name = 'books/book_delete.html'
+    success_url = '/'
+  </code></pre>
+
+  <pre><code>
+// urls.py
+from django.urls import path
+from .views import BookListView, BookCreateView, BookUpdateView, BookDeleteView
+
+urlpatterns = [
+    path('', BookListView.as_view(), name='book_list'),
+    path('create/', BookCreateView.as_view(), name='book_create'),
+    path('update/&lt;int:pk&gt;/', BookUpdateView.as_view(), name='book_update'),
+    path('delete/&lt;int:pk&gt;/', BookDeleteView.as_view(), name='book_delete'),
+]
+  </code></pre>
+
+  <pre><code>
+<!-- Template (book_list.html) -->
+<a href="{% url 'book_update' book.id %}">Edit</a>
+<a href="{% url 'book_delete' book.id %}">Delete</a>
+  </code></pre>
+
+</details>
+
+<hr>
+
+
 
