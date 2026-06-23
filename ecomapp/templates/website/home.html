@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atelier — thoughtfully made home goods and decor for considered living. Shop ceramics, textiles, and curated pieces for every room." />
+  <meta name="theme-color" content="#f7f3ec" />
+  <title>Atelier — Considered Goods for the Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/website/css/style.css" />
+</head>
+<body>
+  <!-- Announcement bar -->
+  <div class="announcement">
+    <p>Complimentary shipping on orders over $75 — a little something for you</p>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <button class="header__menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span class="header__menu-icon"></span>
+      </button>
+
+      <nav class="nav nav--left" aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#featured">Products</a>
+        <a href="#categories">Categories</a>
+        <a href="#story">About</a>
+        <a href="#footer">Contact</a>
+      </nav>
+
+      <a href="#top" class="logo" aria-label="Atelier home">Atelier</a>
+
+      <div class="header__actions">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </button>
+        <button class="icon-btn icon-btn--cart" id="cartBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+      <a href="#top">Home</a>
+      <a href="#featured">Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#story">About</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <span class="eyebrow">New — The Quiet Collection</span>
+          <h1 class="hero__title">Considered goods for a <em>well-lived</em> home.</h1>
+          <p class="hero__text">Honest materials, made-to-last craft, and pieces designed to settle quietly into everyday life. Curated in small batches, never mass produced.</p>
+          <div class="hero__actions">
+            <a href="#featured" class="btn btn--primary">Shop the collection</a>
+            <a href="#categories" class="btn btn--ghost">Browse categories</a>
+          </div>
+        </div>
+        <div class="hero__media">
+          <img src="images/hero.png" alt="A serene living room corner with a boucle armchair and a ceramic vase of dried grasses in warm daylight" />
+          <div class="hero__badge">
+            <span class="hero__badge-num">120+</span>
+            <span class="hero__badge-label">Makers &amp; small studios</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee values -->
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marqueeTrack">
+        <span>Small-batch craft</span><span>•</span>
+        <span>Natural materials</span><span>•</span>
+        <span>Carbon-neutral delivery</span><span>•</span>
+        <span>Free returns</span><span>•</span>
+        <span>Made to last</span><span>•</span>
+      </div>
+    </section>
+
+  
+
+    <!-- Top categories -->
+    <section class="section section--muted" id="categories">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">Shop by room</span>
+            <h2 class="section__title">Top categories</h2>
+          
+        <div class="categories" id="categoryGrid">
+            {% for data in main_categories %}
+            <div class="category-card" data-category="{{ data.main_cat_name }}">
+              <img src="{{ data.cat_image.url }}" alt="{{ data.cat_image }}">
+              <h3>{{ data.main_cat_name }}</h3>
+              <p>{{ data.description }}</p>
+              <p>{{data.created_at}}</p>
+            
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+
+      <!-- Featured products -->
+    <section class="section" id="featured">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">Handpicked</span>
+            <h2 class="section__title">Featured products</h2>
+          </div>
+          <a href="#featured" class="section__link">View all</a>
+        </div>
+        <div class="products" id="productGrid">
+          <!-- Cards injected by JS -->
+        </div>
+        <div class="load-more">
+          <button class="btn btn--ghost" id="loadMoreBtn">Load more products</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story / newsletter -->
+    <section class="story" id="story">
+      <div class="container story__inner">
+        <div class="story__copy">
+          <span class="eyebrow">Our story</span>
+          <h2 class="story__title">Things made slowly, to be kept for a long time.</h2>
+          <p>Atelier began as a search for pieces that feel honest — made by hands that care, from materials that age gracefully. Join our letter for new arrivals and the makers behind them.</p>
+          <form class="newsletter" id="newsletterForm" novalidate>
+            <input type="email" id="emailInput" placeholder="Your email address" aria-label="Email address" required />
+            <button type="submit" class="btn btn--primary">Subscribe</button>
+          </form>
+          <p class="newsletter__note" id="newsletterNote" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#top" class="logo">Atelier</a>
+        <p>Considered goods for a well-lived home.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>Shop</h3>
+          <a href="#categories">Living</a>
+          <a href="#categories">Kitchen</a>
+          <a href="#categories">Decor</a>
+        </div>
+        <div class="footer__col">
+          <h3>Company</h3>
+          <a href="#story">Our story</a>
+          <a href="#featured">Makers</a>
+          <a href="#top">Journal</a>
+        </div>
+        <div class="footer__col">
+          <h3>Support</h3>
+          <a href="#top">Shipping</a>
+          <a href="#top">Returns</a>
+          <a href="#top">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>&copy; <span id="year"></span> Atelier Studio. All rights reserved.</p>
+      <p>Designed with care.</p>
+    </div>
+  </footer>
+
+  <!-- Cart toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
