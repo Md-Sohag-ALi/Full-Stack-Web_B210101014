@@ -980,3 +980,64 @@ urlpatterns = [
 
 
 
+
+
+<hr>
+<h3>🔹🛒 Single Vendor Ecommerce Project</h3>
+
+<details>
+  <summary>▶ View Details</summary>
+
+  
+
+## 📌 Project Summary
+This is a **Single Vendor Ecommerce Platform** built with Django. The project includes product management, category/subcategory handling, user authentication, and a dynamic frontend interface. The development spanned **10 days**, with most core features completed except for a few remaining tasks.
+
+---
+
+
+---
+
+## ✅ Completed Tasks (Day 1–10)
+
+### 🗓️ Day 1–2: Project Setup & Core Configuration
+- Django project (`ecom`) and app (`ecomapp`) initialized
+- `settings.py`, `urls.py`, `asgi.py`, `wsgi.py` configured
+- Virtual environment (`venv`) and `requirements.txt` set up
+- `.gitignore` and basic project structure finalized
+
+### 🗓️ Day 3–4: Database & Models
+- `models.py` created for products, categories, subcategories
+- Migrations applied and `db.sqlite3` generated
+- Fixtures (`fixtures.json`) created successfully
+- Additional fixture files for categories and subcategories
+
+### 🗓️ Day 5–6: User Authentication
+- `user_login.html` and `user_forgot_password.html` templates created
+- Login and password reset functionality implemented
+- `403.html` and `base.html` templates added
+- Context processors and common functions (`common_func.py`) built
+
+### 🗓️ Day 7–8: Product Management (CRUD)
+- Product listing, detail, add, and edit pages built
+- Main category management (`main_category_list`, `add_product_main_category`)
+- Product templates organized under `templates/product/`
+- Admin panel customized via `admin.py`
+
+### 🗓️ Day 9: Static Files & Basic UI
+- CSS files: `style.css`, `cart.css`, `dashboard_menu.css`, `ecommerce.css`
+- Fonts and images added to `static/`
+- `home.html` created under `home/` template folder
+
+### 🗓️ Day 10: Media & Final Touches
+- Media folders for category and product images configured
+- `setting_dashboard` template added
+- Project tested locally, fixtures loaded successfully
+
+---
+
+
+
+</details>
+
+<hr>
