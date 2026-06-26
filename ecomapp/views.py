@@ -5,10 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from ecomapp.common_func import checkUserPermission
-from ecomapp.models import (Customer, MenuList, Product, ProductMainCategory, ProductSubCategory)
+from ecomapp.models import (Customer, MenuList, OrderCart, Product, ProductMainCategory, ProductSubCategory)
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+#from ecomapp.utils import generate_otp
 # Create your views here.
 
 
@@ -260,6 +260,8 @@ def login_view(request):
             return redirect(next_url)
     return render(request, 'website/user/login.html')    
 
+
+
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -279,3 +281,49 @@ def register_view(request):
         return redirect(f'/backend/verify-otp/?email={email}')
 
     return render(request, 'website/user/register.html')
+
+
+
+
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Logged out successfully.')
+    return redirect('home')
+
+
+
+
+
+def cart_amount_summary(request):
+
+    sub_total_amount = 0
+    total_vat = 0
+    total_discount = 0 
+    grand_total = 0
+
+    if request.user.is_authenticated:
+        customer= Customer.objects.filter(user=request.user).first()
+        cart_items = OrderCart.objects.filter(customer=customer, is_active=True, is_order=False)
+        for item in cart_items:
+            sub_total_amount += item.total_amount
+            #total_vat += (item.product.price * 0.15)
+    grand_total = (sub_total_amount + total_vat) - total_discount 
+
+    return {'sub_total_amount': sub_total_amount, 'total_vat': total_vat, 'total_discount': total_discount, 'grand_total': grand_total}
+
+
+
+
+@login_required
+def products_details(request, product_slug):
+    product = Product.objects.filter(product_slug=product_slug, is_active=True).first() #first() method use korlam karon product_slug unique hote pare na, tai first() use kore first matching product ta nibo. jodi kono product na thake tahole None return korbe.
+    if not product:
+        messages.error(request, 'Product not found.')
+        return redirect('home')
+    context = {
+        'product': product
+    }
+    return render(request, 'website/product/products_details.html', context)  

@@ -138,7 +138,9 @@
             <div class="product-card">
 
                 {% if product.product_image %}
-                <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                <a href="{% url 'products-details' product.product_slug %}">
+                    <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                </a>
                 {% endif %}
 
                 <h3>{{ product.product_name }}</h3>

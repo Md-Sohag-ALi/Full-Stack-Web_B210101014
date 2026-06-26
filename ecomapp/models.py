@@ -154,6 +154,8 @@ class Product(models.Model):
             self.product_slug = slug
         super().save(*args, **kwargs) 
         
+
+
 #For Login        
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -164,3 +166,24 @@ class Customer(models.Model):
     def __str__(self):
         return self.user.username
                
+               
+               
+class OrderCart(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,related_name='order_cart')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    is_order= models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def total_amount(self):
+        return_value=float(self.quantity) * float(self.product.price)
+        return return_value
+    
+    class Meta:
+        db_table = 'order_cart'
+
+    def __str__(self):
+        return f"{self.customer} - {self.product.product_name} ({self.quantity})"         
