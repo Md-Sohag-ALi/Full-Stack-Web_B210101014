@@ -94,46 +94,72 @@
 
   
 
-    <!-- Top categories -->
-    <section class="section section--muted" id="categories">
-      <div class="container">
+   <!-- Top categories -->
+<section class="section section--muted" id="categories">
+    <div class="container">
+
         <div class="section__head">
-          <div>
-            <span class="eyebrow">Shop by room</span>
-            <h2 class="section__title">Top categories</h2>
-          
+            <div>
+                <span class="eyebrow">Shop by room</span>
+                <h2 class="section__title">Top Categories</h2>
+            </div>
+        </div>
+
         <div class="categories" id="categoryGrid">
             {% for data in main_categories %}
-            <div class="category-card" data-category="{{ data.main_cat_name }}">
-              <img src="{{ data.cat_image.url }}" alt="{{ data.cat_image }}">
-              <h3>{{ data.main_cat_name }}</h3>
-              <p>{{ data.description }}</p>
-              <p>{{data.created_at}}</p>
-            
+            <div class="category-card">
+                <img src="{{ data.cat_image.url }}" alt="{{ data.main_cat_name }}">
+                <h3>{{ data.main_cat_name }}</h3>
+                <p>{{ data.description }}</p>
             </div>
             {% endfor %}
         </div>
-      </div>
-    </section>
 
-      <!-- Featured products -->
-    <section class="section" id="featured">
-      <div class="container">
+    </div>
+</section>
+
+    
+    <!-- Featured Products -->
+<section class="section" id="featured">
+    <div class="container">
+
         <div class="section__head">
-          <div>
-            <span class="eyebrow">Handpicked</span>
-            <h2 class="section__title">Featured products</h2>
-          </div>
-          <a href="#featured" class="section__link">View all</a>
+            <div>
+                <span class="eyebrow">Handpicked</span>
+                <h2 class="section__title">Featured Products</h2>
+            </div>
+
+          
         </div>
+
         <div class="products" id="productGrid">
-          <!-- Cards injected by JS -->
+
+            {% for product in featured_products %}
+            <div class="product-card">
+
+                {% if product.product_image %}
+                <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                {% endif %}
+
+                <h3>{{ product.product_name }}</h3>
+
+                <p>{{ product.description|truncatewords:12 }}</p>
+
+                <h4>${{ product.price }}</h4>
+
+            </div>
+            {% endfor %}
+
         </div>
+
         <div class="load-more">
-          <button class="btn btn--ghost" id="loadMoreBtn">Load more products</button>
+            <button class="btn btn--ghost" id="loadMoreBtn">
+                Load More Products
+            </button>
         </div>
-      </div>
-    </section>
+
+    </div>
+</section>
 
     <!-- Story / newsletter -->
     <section class="story" id="story">
@@ -189,6 +215,6 @@
   <!-- Cart toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js"></script>
+  <script src="static/website/js/script.js"></script>
 </body>
 </html>

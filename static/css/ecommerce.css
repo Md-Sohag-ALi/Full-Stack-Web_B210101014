@@ -835,3 +835,15 @@ hr {
 }
 
 
+.checkbox-field{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 45px;
+}
+
+.checkbox-field input{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

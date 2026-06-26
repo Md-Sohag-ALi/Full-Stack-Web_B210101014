@@ -152,4 +152,15 @@ class Product(models.Model):
                 slug = f"{base_slug}-{num}"
                 num += 1
             self.product_slug = slug
-        super().save(*args, **kwargs)    
+        super().save(*args, **kwargs) 
+        
+#For Login        
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=15)
+    date_of_birth = models.DateField(null=True, blank=True)
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+               

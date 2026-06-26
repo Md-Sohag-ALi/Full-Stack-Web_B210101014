@@ -5,8 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from ecomapp.common_func import checkUserPermission
-from ecomapp.models import (MenuList, Product, ProductMainCategory, ProductSubCategory)
+from ecomapp.models import (Customer, MenuList, Product, ProductMainCategory, ProductSubCategory)
 from django.contrib import messages
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 
@@ -178,6 +180,7 @@ def add_new_product(request):
         discount_price = request.POST.get('discount_price')
         discount_percentage = request.POST.get('discount_percentage')
         description = request.POST.get('description')
+        is_featured = request.POST.get("is_featured") == "True"
         main_category_id = request.POST.get('main_category')
         sub_category_id = request.POST.get('sub_category')
         image = request.FILES.get('product_image')
@@ -205,6 +208,7 @@ def add_new_product(request):
             discount_price=discount_price,
             discount_percentage=discount_percentage,
             description=description,
+            is_featured=is_featured,
             main_category=main_category,
             sub_category=sub_category,
             created_by=request.user
@@ -226,8 +230,52 @@ def add_new_product(request):
 
 
 def home(request):
-    main_categories = ProductMainCategory.objects.filter(is_active=True)
+    main_categories = ProductMainCategory.objects.filter(is_active=True )
+    
+    featured_products = Product.objects.filter(is_featured=True,is_active=True).order_by('-id')[:10]
     context = {
         'main_categories': main_categories,
+        'featured_products': featured_products,
     }
     return render(request, 'website/home.html', context)
+
+def login_view(request):
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+        
+        profile = Customer.objects.get(phone=phone)
+        user = authenticate(request, username=profile.user.username, password=password)
+        
+        if user:
+            login(request, user)
+            messages.success(request, 'Logged in successfully.') 
+            
+            #suppose loggin nai kint tumi add to cart e click korle login page a niye jabe. login korar por abar oi page a niye jabe.
+            next_url = request.GET.get('next')
+            if next_url:
+                next_url = next_url.strip()
+            else:
+                next_url = 'home'
+            return redirect(next_url)
+    return render(request, 'website/user/login.html')    
+
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        dob = request.POST['date_of_birth']
+        password = request.POST['password']
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'website/user/register.html', {'error': 'Username already taken'})
+        
+        user = User.objects.create_user(username=username, email=email, password=password)
+        Customer.objects.create(user=user, phone=phone, date_of_birth=dob, is_active=False)
+
+        generate_otp(email)
+
+        return redirect(f'/backend/verify-otp/?email={email}')
+
+    return render(request, 'website/user/register.html')

@@ -11,4 +11,9 @@ urlpatterns = [
     path('product/edit/<int:pk>/', views.product_edit, name = 'product-edit'),
     path('add-new-product/', views.add_new_product, name = 'add-new-product'),
     path('', views.home, name = 'home'),
-] 
+   
+    #Authintication
+    path('login/', views.login_view, name='user_login'),
+    path('register/', views.register_view, name='user_register'),
+    #path('logout/', views.logout_view, name='user_logout'),
+]  
