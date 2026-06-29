@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProductMainCategory,ProductSubCategory,Product
+from .models import OrderCart, ProductMainCategory,ProductSubCategory,Product
 
 # Register your models here.
 @admin.register(ProductMainCategory)
@@ -27,3 +27,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter          = ('is_active','main_category', 'sub_category')
     search_fields        = ('product_name', 'main_category__main_cat_name', 'sub_category__sub_cat_name', 'product_slug')
     ordering             = ('product_name',) 
+    
+    
+admin.site.register(OrderCart)
+        
+    

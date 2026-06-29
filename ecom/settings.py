@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import importlib
 import os
 
-
-from dotenv import load_dotenv
+load_dotenv = None
+if importlib.util.find_spec('dotenv') is not None:
+    load_dotenv = importlib.import_module('dotenv').load_dotenv
+else:
+    def load_dotenv(*args, **kwargs):
+        return False
 
 load_dotenv()
 
@@ -68,8 +73,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
                 'ecomapp.context_processors.menu_items',
-                #'ecomapp.context_processors.get_cart_item',
+                'ecomapp.context_processors.get_cart_item',
 
             ],
         },

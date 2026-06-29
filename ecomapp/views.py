@@ -8,6 +8,8 @@ from ecomapp.common_func import checkUserPermission
 from ecomapp.models import (Customer, MenuList, OrderCart, Product, ProductMainCategory, ProductSubCategory)
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+
 #from ecomapp.utils import generate_otp
 # Create your views here.
 
@@ -276,9 +278,9 @@ def register_view(request):
         user = User.objects.create_user(username=username, email=email, password=password)
         Customer.objects.create(user=user, phone=phone, date_of_birth=dob, is_active=False)
 
-        generate_otp(email)
+        #generate_otp(email)
 
-        return redirect(f'/backend/verify-otp/?email={email}')
+        #return redirect(f'/backend/verify-otp/?email={email}')
 
     return render(request, 'website/user/register.html')
 
@@ -323,7 +325,82 @@ def products_details(request, product_slug):
     if not product:
         messages.error(request, 'Product not found.')
         return redirect('home')
+    if request.user.is_authenticated:
+       customer = Customer.objects.filter(user=request.user).first()
+       product_cart = OrderCart.objects.filter(customer=customer, product=product, is_active=True, is_order=False).first() 
+       if product_cart:
+           product.product_cart = product_cart
     context = {
-        'product': product
+        'product': product,
     }
-    return render(request, 'website/product/products_details.html', context)  
+    return render(request, 'website/product/products_details.html', context)
+
+
+
+
+def add_or_update_cart(request):
+
+    is_authenticated = request.user.is_authenticated
+    
+    
+    if is_authenticated:
+        if request.method == 'POST':
+            
+            customer=Customer.objects.filter(user=request.user).first()
+            
+            product_id = request.POST.get('product_id')
+            quantity = int(request.POST.get('quantity', 0))
+
+            try:
+                isRemoved = False
+
+                cart_item, created = OrderCart.objects.update_or_create(
+                    customer=customer, product_id=product_id, is_order=False, is_active=True,
+                    defaults={'quantity': quantity}
+                )
+                
+                if not created:
+                    if quantity <= 0:
+                        cart_item.is_active = False
+                        isRemoved = True
+
+                    cart_item.quantity = quantity
+                    cart_item.save()
+
+                amount_summary = cart_amount_summary(request)
+
+                cart_item_count = OrderCart.objects.filter(customer=customer, is_order=False, is_active=True).count()
+                print(f"Cart Item Count: {cart_item_count}")
+
+               
+
+                response = {
+                    'status': 'success',
+                    'message': 'Cart updated successfully',
+                    'is_authenticated': is_authenticated,
+                    'isRemoved': isRemoved,
+                    'item_price': cart_item.total_amount,
+                    'cart_item_count': cart_item_count,
+                    'amount_summary': amount_summary,
+                }
+                
+                return JsonResponse(response)
+            
+
+            except OrderCart.DoesNotExist:
+                return JsonResponse({'status': 'error', 'message': 'Cart item not found', 'is_authenticated': is_authenticated,})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request', 'is_authenticated': is_authenticated,}, status=400) 
+
+
+@login_required
+def cart(request):
+
+    customer= Customer.objects.filter(user=request.user).first()
+    context= {
+        'customer': customer,
+
+    }
+
+    return render(request, 'website/cart/cart.html',context)    
+   
