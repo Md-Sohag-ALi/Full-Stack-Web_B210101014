@@ -12,6 +12,17 @@
   <link rel="stylesheet" href="/static/website/css/style.css" />
 </head>
 <body>
+
+  {% if messages %}
+    <div class="message">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
   <!-- Announcement bar -->
   <div class="announcement">
     <p>Complimentary shipping on orders over $75 — a little something for you</p>

@@ -11,7 +11,7 @@
 
 <!-- CART PRODUCT Table-->
 <section class="cart-section">
-    <form method="post" action="  " id="cart_form">
+    <form method="post" action=" {% url "checkout" %} " id="cart_form">
         {% csrf_token %}
         <div class="container-fluid">
             <div class="cart-wrap-box">
@@ -105,7 +105,7 @@
                                                 <label for="payment_method" >SSL</label>
                                             </div>
                                         </div>
-                                </div>
+                            </div>
                             <div class="button-box">
                                 <div class="complete_order">
                                     {% comment %} <a class="fico-btn" href="#">Continue</a> {% endcomment %}

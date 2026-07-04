@@ -1,4 +1,6 @@
 from django.urls import path
+
+from . import views_payment
 from . import views
 urlpatterns = [
     path('dashboard/',views.ecom_dashboard , name = 'dashboard' ),
@@ -24,5 +26,13 @@ urlpatterns = [
      path('add-or-update-cart/', views.add_or_update_cart, name='add-or-update-cart'),
      
      path('cart/', views.cart, name='cart'),
+     path('checkout/', views.checkout, name='checkout'),
+     
+     
+     #payment
+     
+     path('payment/success/<str:str_data>/', views_payment.payment_complete, name='payment-complete'),
+     path('payment/cancel/<str:str_data>/', views_payment.payment_cancel, name='payment-cancel'),
+     path('payment/failed/<str:str_data>/', views_payment.payment_failed, name='payment_FAILED'),
      
 ]  
