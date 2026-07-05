@@ -21,7 +21,7 @@ def generate_otp(email):
 
     send_email(
         [email],
-        ['imam.hossain@isho.com'],
+        ['sksohag0990@gmail.com'],
         [],
         'Your OTP Code',
         'website/mail/otp_mail.html',
@@ -53,8 +53,10 @@ def send_email(mail_to,cc_list,bcc_list,subject,template,context):
         )
 
         email.attach_alternative(html_body, "text/html")
+        print("Sending mail to:", mail_to)
 
         try:
             email.send(fail_silently=False)
         except Exception as e:
             print(f"Error sending email: {e}")
+            print("SMTP ERROR:", repr(e))

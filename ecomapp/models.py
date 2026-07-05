@@ -1,5 +1,4 @@
 import datetime
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -307,7 +306,7 @@ class EmailOTP(models.Model):
     is_active = models.BooleanField(default=True)
 
     def is_expired(self):
-        return timezone.now() > self.created_at + datetime.timezone.timedelta(minutes=60)
+        return timezone.now() > self.created_at + timezone.timedelta(minutes=60)
 
     def __str__(self):
         return f"{self.email} - {self.code}"         

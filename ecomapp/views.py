@@ -251,7 +251,7 @@ def login_view(request):
         password = request.POST['password']
 
         
-        profile = Customer.objects.get(phone=phone)
+        profile = Customer.objects.filter(phone=phone).first()
         user = authenticate(request, username=profile.user.username, password=password)
         if user:
             login(request, user)
