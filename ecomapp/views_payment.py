@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.shortcuts import redirect
@@ -9,6 +7,8 @@ from django.db.models import Sum
 from django.utils import timezone
 from django.conf import settings
 import requests
+from uuid import uuid4
+
 from .models import Order, OnlinePaymentRequest,OrderPayment
 
 
@@ -50,25 +50,24 @@ def payment_create(request):
     return JsonResponse(response_data, status=400)
 
 
-#payment initiation function
 def create_payment_request(request, order_id):
     transaction_id = str(uuid4())
-    order_obj = Order.objects.get(id=order_id)
+    order_obj = Order.objects.filter(id=order_id).last()
+
     
+
     success_url = request.build_absolute_uri(f'/backend/payment/success/{transaction_id}/')
     fail_url = request.build_absolute_uri(f'/backend/payment/fail/{transaction_id}/')
     cancel_url = request.build_absolute_uri(f'/backend/payment/cancel/{transaction_id}/')
-    
-    
+
     OnlinePaymentRequest.objects.create(
         order=order_obj,
         transaction_id=transaction_id,
-        amount = order_obj.grand_total,
-        payment_status = 'Pending',
-        created_by = request.user,
+        amount=order_obj.grand_total,
+        payment_status='Pending',
+        created_by=request.user,
     )
-    
-    #data for sslcommerz payment request
+
     payment_data = {
         'store_id': settings.SSLCOMMERZ_STORE_ID,
         'store_passwd': settings.SSLCOMMERZ_STORE_PASSWORD,
@@ -89,27 +88,26 @@ def create_payment_request(request, order_id):
         'product_category': 'Ecommerce',
         'product_profile': 'general',
     }
-    
-    #send payment request to sslcommerz
+
+    print(f"Payment Data: {payment_data}")
+
     response = requests.post(settings.SSLCOMMERZ_API_URL, data=payment_data)
     data = response.json()
-    
+
     if data.get('status') == 'SUCCESS':
         response_data = {
             'GatewayPageURL': data['GatewayPageURL'],
             'status': 'SUCCESS',
-            
         }
-        
         response_status = 200
     else:
         response_data = {
             'status': 'FAILED',
+            'message': data.get('failedreason', 'Unknown error occurred')
         }
         response_status = 400
+
     return response_data, response_status
-
-
 
 
 @csrf_exempt
@@ -159,6 +157,7 @@ def verify_ssl_payment(val_id):
     if result.get('status') == 'VALID':
         return True
     return False
+
 
 @csrf_exempt
 def payment_check(request, str_data):

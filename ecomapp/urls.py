@@ -19,6 +19,8 @@ urlpatterns = [
     path('login/', views.login_view, name='user_login'),
     path('register/', views.register_view, name='user_register'),
     path('logout/', views.logout_view, name='user_logout'),
+    path('request-otp/', views.request_otp_view, name='request_otp'),
+    path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     
     
     
@@ -34,5 +36,5 @@ urlpatterns = [
      path('payment/success/<str:str_data>/', views_payment.payment_complete, name='payment-complete'),
      path('payment/cancel/<str:str_data>/', views_payment.payment_cancel, name='payment-cancel'),
      path('payment/failed/<str:str_data>/', views_payment.payment_failed, name='payment_FAILED'),
-     
+     path('payment/check/<str:str_data>/', views_payment.payment_check, name="payment_check"),
 ]  

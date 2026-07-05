@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.utils import timezone
 # Create your models here.
 
 class MenuList(models.Model):
@@ -294,4 +295,19 @@ class OrderPayment(models.Model):
         return str(self.order.order_number)+" ("+str(self.payment_method)+" - "+str(self.amount)+")"
 
     class Meta:
-        db_table = 'order_payments'        
+        db_table = 'order_payments'       
+        
+        
+#Email OTP Verification
+
+class EmailOTP(models.Model):
+    email = models.EmailField()
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def is_expired(self):
+        return timezone.now() > self.created_at + datetime.timezone.timedelta(minutes=60)
+
+    def __str__(self):
+        return f"{self.email} - {self.code}"         

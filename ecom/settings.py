@@ -11,15 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import importlib
 import os
-
-load_dotenv = None
-if importlib.util.find_spec('dotenv') is not None:
-    load_dotenv = importlib.import_module('dotenv').load_dotenv
-else:
-    def load_dotenv(*args, **kwargs):
-        return False
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -157,12 +150,14 @@ SSLCOMMERZ_API_URL = os.getenv('SSLCOMMERZ_API_URL')
 SSLCOMMERZ_VALIDATION_API = os.getenv('SSLCOMMERZ_VALIDATION_API')
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'no-reply@plat-forms.com'
-EMAIL_HOST_PASSWORD = 'Nap43324'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-DEFAULT_FROM_EMAIL = "Plat-Forms <no-reply@plat-forms.com>"
+
+DEFAULT_FROM_EMAIL = f"Plat-Forms <{EMAIL_HOST_USER}>"
 
