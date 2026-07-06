@@ -13,7 +13,7 @@ from ecomapp.common_func import checkUserPermission
 from django.http import JsonResponse
 from .views_payment import create_payment_request
 from ecomapp.models import (
-     MenuList,ProductMainCategory,Product,ProductSubCategory, Customer,OrderCart,Order,OrderDetail,EmailOTP
+     MenuList,ProductMainCategory,Product,ProductSubCategory, Customer,OrderCart,Order,OrderDetail,EmailOTP,UserProfile
    
 )
 from django.db import transaction
@@ -526,3 +526,11 @@ def verify_otp_view(request):
 
     return render(request, 'website/user/verify_otp.html', {'email': email})      
            
+           
+@login_required
+def profile(request):
+    profile = UserProfile.objects.get(user=request.user)
+
+    return render(request, "website/accounts/profile.html", {
+        "profile": profile
+    })           

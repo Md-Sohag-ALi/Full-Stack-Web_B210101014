@@ -309,4 +309,21 @@ class EmailOTP(models.Model):
         return timezone.now() > self.created_at + timezone.timedelta(minutes=60)
 
     def __str__(self):
-        return f"{self.email} - {self.code}"         
+        return f"{self.email} - {self.code}"    
+    
+    
+    
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="profile")
+
+    profile_image = models.ImageField(upload_to="profile/",default="profile/default.png")
+
+    phone = models.CharField(max_length=15, blank=True)
+
+    date_of_birth = models.DateField(null=True, blank=True)
+
+    gender = models.CharField(max_length=10,choices=(("Male", "Male"),("Female", "Female"),("Other", "Other"),),blank=True)
+
+    def __str__(self):
+        return self.user.username         

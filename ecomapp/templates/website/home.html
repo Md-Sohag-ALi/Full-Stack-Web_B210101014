@@ -49,9 +49,45 @@
         <button class="icon-btn" aria-label="Search">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         </button>
-        <button class="icon-btn" aria-label="Account">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
-        </button>
+
+
+        <!--Work of User Icon -->
+         {% if user.is_authenticated %}
+<div class="profile-nav">
+    <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+        </svg>
+    </button>
+
+    <ul>
+        <li><a href="{% url 'profile' %}">My Profile</a></li>
+        <li><a href="#">My Orders</a></li>
+        <li><a href="#">Wishlist</a></li>
+        <li><a href="#">Address</a></li>
+        <li><a href="#">Change Password</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+    </ul>
+</div>
+
+{% else %}
+<div class="profile-nav">
+    <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+        </svg>
+    </button>
+
+    <ul>
+        <li><a href="{% url 'user_login' %}">Login</a></li>
+        <li><a href="{% url 'user_register' %}">Register</a></li>
+        <li><a href="#">Forgot Password</a></li>
+    </ul>
+</div>
+{% endif %}
+
         <button class="icon-btn icon-btn--cart" id="cartBtn" aria-label="Cart">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
           <span class="cart-count" id="cartCount">0</span>
