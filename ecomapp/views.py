@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import MenuList
+from .models import HeroBanner, MenuList
 from django.contrib.auth.models import User
 
 from django.shortcuts import redirect
@@ -232,18 +232,16 @@ def add_new_product(request):
     return render(request, 'product/add_new_product.html',context)
 
 def home(request):
-
-    main_categories= ProductMainCategory.objects.filter(is_active=True)
-
+    main_categories = ProductMainCategory.objects.filter(is_active=True)
     featured_products = Product.objects.filter(is_featured=True, is_active=True).order_by('-id')[:10]
+    hero_banners = HeroBanner.objects.filter(is_active=True)
 
     context = {
         'main_categories': main_categories,
         'featured_products': featured_products,
-        
+        'hero_banners': hero_banners,
     }
-
-    return render(request, 'website/home.html',context)
+    return render(request, 'website/home.html', context)
 
 def login_view(request):
     if request.method == 'POST':
@@ -533,4 +531,24 @@ def profile(request):
 
     return render(request, "website/accounts/profile.html", {
         "profile": profile
-    })           
+    })  
+
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+
+    if request.method == "POST":
+        profile.phone = request.POST.get("phone")
+        profile.date_of_birth = request.POST.get("date_of_birth")
+        profile.gender = request.POST.get("gender")
+
+        if "profile_image" in request.FILES:
+            profile.profile_image = request.FILES["profile_image"]
+
+        profile.save()
+
+        return redirect("profile")
+
+    return render(request, "website/accounts/edit_profile.html", {
+        "profile": profile
+    })             

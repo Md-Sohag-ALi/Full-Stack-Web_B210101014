@@ -53,3 +53,4 @@ var swiper = new Swiper(".accents-swiper", {
         prevEl: '.accents-swiper .swiper-button-prev'
     }
 });
+});

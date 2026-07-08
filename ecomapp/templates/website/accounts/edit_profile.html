@@ -1,0 +1,340 @@
+{% extends 'web_base.html' %}
+{% block content %}
+<style>
+  :root{
+    --paper:#EAF0EC;
+    --paper-2:#DCE6DF;
+    --ink:#16332B;
+    --ink-soft:#3F5A50;
+    --brass:#B08D57;
+    --brass-dark:#8C6D3F;
+    --danger:#B0473F;
+    --card-w: 520px;
+  }
+
+  .profile-wrap{
+    min-height: 100vh;
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(22,51,43,0.06) 1px, transparent 0);
+    background-size: 18px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 48px 20px;
+    font-family: 'Inter', 'Work Sans', system-ui, sans-serif;
+    color: var(--ink);
+  }
+
+  .id-card{
+    width: 100%;
+    max-width: var(--card-w);
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    padding: 40px 36px 32px;
+    position: relative;
+    box-shadow: 8px 8px 0 rgba(22,51,43,0.08);
+  }
+
+  .id-card::before{
+    content:"";
+    position:absolute;
+    inset: 10px;
+    border: 1px dashed rgba(22,51,43,0.35);
+    border-radius: 8px;
+    pointer-events:none;
+  }
+
+  .id-eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass-dark);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom: 18px;
+  }
+
+  .id-title{
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+  }
+
+  .id-subtitle{
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+  }
+
+  /* --- Photo slot (signature element) --- */
+  .photo-slot{
+    width: 132px;
+    margin: 0 auto 26px;
+    position: relative;
+  }
+
+  .photo-frame{
+    width: 132px;
+    height: 132px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    transform: rotate(-2deg);
+    background: var(--paper-2);
+    border: 1px solid rgba(22,51,43,0.25);
+    box-shadow: 0 6px 14px rgba(22,51,43,0.18);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .photo-frame:hover{ transform: rotate(0deg) scale(1.02); }
+
+  .photo-frame img{
+    width:100%; height:100%; object-fit: cover;
+    display:block;
+    filter: sepia(6%) saturate(105%);
+  }
+
+  .corner{
+    position:absolute;
+    width: 18px; height: 18px;
+    border: 2px solid var(--brass);
+    z-index: 2;
+  }
+  .corner.tl{ top:-2px; left:-2px; border-right:none; border-bottom:none; }
+  .corner.br{ bottom:-2px; right:-2px; border-left:none; border-top:none; }
+
+  .photo-overlay{
+    position:absolute; inset:0;
+    background: rgba(22,51,43,0.72);
+    color:#EAF0EC;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 11px;
+    font-family:'Space Mono', monospace;
+    text-align:center;
+    padding: 8px;
+    opacity:0;
+    transition: opacity 0.2s ease;
+  }
+  .photo-frame:hover .photo-overlay{ opacity:1; }
+
+  .photo-tag{
+    position:absolute;
+    top: -10px; right: -22px;
+    background: var(--brass);
+    color: var(--paper);
+    font-family:'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    transform: rotate(6deg);
+    box-shadow: 2px 2px 0 rgba(22,51,43,0.25);
+  }
+
+  input[type="file"]{ display:none; }
+
+  /* --- Fields --- */
+  .field{
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .field-label{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brass-dark);
+    margin-bottom: 6px;
+  }
+
+  .field input[type="text"],
+  .field input[type="date"],
+  .field select{
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(22,51,43,0.3);
+    padding: 8px 2px;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  .field select{
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2316332B'><path d='M5 7l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    background-size: 14px;
+    cursor: pointer;
+  }
+
+  .field input:focus,
+  .field select:focus{
+    border-bottom-color: var(--brass);
+  }
+
+  .field input:focus + .field-underline,
+  .field-row:focus-within .field-underline{
+    transform: scaleX(1);
+  }
+
+  .field-hint{
+    font-size: 11px;
+    color: var(--ink-soft);
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  .row-2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 480px){
+    .row-2{ grid-template-columns: 1fr; }
+  }
+
+  /* --- Submit / stamp button --- */
+  .stamp-btn{
+    width: 100%;
+    margin-top: 28px;
+    padding: 14px 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 8px;
+    font-family:'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .stamp-btn:hover{ background: #0E211B; }
+  .stamp-btn:active{ transform: scale(0.98); }
+
+  .stamp-btn .stamp-mark{
+    position:absolute;
+    right: 16px; top: 50%;
+    transform: translateY(-50%) rotate(-8deg);
+    border: 1.5px solid var(--brass);
+    color: var(--brass);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+  }
+
+  .footer-note{
+    text-align:center;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    opacity: 0.65;
+    margin-top: 18px;
+    font-family:'Space Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .photo-frame, .stamp-btn, .photo-overlay{ transition: none; }
+  }
+</style>
+
+<div class="profile-wrap">
+  <div class="id-card">
+    <div class="id-eyebrow">
+      <span>MEMBER FILE</span>
+      <span>NO. {{ profile.user.id|stringformat:"04d" }}</span>
+    </div>
+    <h1 class="id-title">Your Profile</h1>
+    <p class="id-subtitle">Keep your details current — this is what others see.</p>
+
+    <form method="POST" enctype="multipart/form-data" id="profile-form">
+      {% csrf_token %}
+
+      <div class="photo-slot">
+        <span class="photo-tag">EDIT</span>
+        <label class="photo-frame" for="id_profile_image">
+          <span class="corner tl"></span>
+          <span class="corner br"></span>
+          <img src="{{ profile.profile_image.url }}" id="photo-preview" alt="{{ profile.user.username }}">
+          <span class="photo-overlay">Click to<br>update photo</span>
+        </label>
+        <input type="file" name="profile_image" id="id_profile_image" accept="image/*">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="id_phone">Phone</label>
+        <input type="text" name="phone" id="id_phone" value="{{ profile.phone }}" placeholder="+880 1XX-XXXXXXX">
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label class="field-label" for="id_dob">Date of birth</label>
+          <input type="date" name="date_of_birth" id="id_dob" value="{{ profile.date_of_birth|date:'Y-m-d' }}">
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="id_gender">Gender</label>
+          <select name="gender" id="id_gender">
+            <option value="">Select</option>
+            <option value="Male" {% if profile.gender == "Male" %}selected{% endif %}>Male</option>
+            <option value="Female" {% if profile.gender == "Female" %}selected{% endif %}>Female</option>
+            <option value="Other" {% if profile.gender == "Other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="stamp-btn">
+        Save changes
+        <span class="stamp-mark">OK</span>
+      </button>
+    </form>
+
+    <p class="footer-note">Last updated by you · handle with care</p>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var fileInput = document.getElementById('id_profile_image');
+    var preview = document.getElementById('photo-preview');
+
+    fileInput.addEventListener('change', function(e){
+      var file = e.target.files && e.target.files[0];
+      if(!file) return;
+      if(!file.type.startsWith('image/')) return;
+
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        preview.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Gentle confirmation on submit so the "stamp" feels earned
+    var form = document.getElementById('profile-form');
+    var btn = form.querySelector('.stamp-btn');
+    form.addEventListener('submit', function(){
+      btn.style.opacity = '0.75';
+      btn.textContent = 'Saving…';
+    });
+  })();
+</script>
+{% endblock %}

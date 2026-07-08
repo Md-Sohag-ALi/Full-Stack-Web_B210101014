@@ -18,66 +18,105 @@
 
     </head>
     <body>
-        <!--Header -->
-        <header class="header" id="header_sticky">
-            <div class="container-fluid">
-                <div class="header-top">
-                    <div class="nav-top-left">
+       <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <button class="header__menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span class="header__menu-icon"></span>
+      </button>
 
-                        <div class="fico-logo">
-                            <div class="fico-mobile_menu">
-                                <div class="fico-mobile" id="fico-mobile">
-                                    <img src="{% static 'website/images/icons/hum-baarger.svg' %}" alt="fico">
-                                </div>
-                            </div>
-                            <a href="{% url 'home' %}"> <img src="{% static 'website/images/icons/logo.svg' %}" alt="fico" srcset="{% static 'website/images/icons/logo.svg' %}" style="width: 120px;"></a>
-                        </div>
-                        <div class="nav-menu main-nav-menu" id="main-nav-menu">
-                            <ul>
-                                <li><a href="#">About Fico</a></li>
-                                <li><a href="{% url 'product-list' %}">Products</a></li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="nav-menu nav-top-right">
-                        <ul>
-                            <li>
-                                <div class="search-box" id="search-box">
-                                    <input type="search" name="search" id="search">
-                                    <button type="button" onclick="search_box()" id="search-btn"><img src="{% static 'website/images/icons/search.svg' %}" alt="Search"></button>
-                                </div>
-                            </li>
-                            <li class="cart-box">
-                                <button type="button" class="cart-qty-box" onclick="cart_open()"> <img src="{% static 'website/images/icons/shopping-cart.svg' %}" alt="cart">
-                                    <span class="item-qty" id="cart_item_quantity" {% if cart_item_count < 1 %}style="display: none;"{% endif %}>{{ cart_item_count|default:0 }}</span>
-                                    <span class="item-qty cart_item_quantity">{{ cart_item_count|default:0 }}</span>
-                                </button>
-                            </li>
-                            <li class="profile-nav">
-                                {% if user.is_authenticated %}
-                                    <a href="#"><img src="{% static 'website/images/icons/user-icon.svg' %}" alt="user"></a>
-                                    <ul>
-                                        <li><a href="">My Account</a></li>
-                                        <li><a href="{% url 'user_logout' %}">Logout</a></li>
-                                    </ul>
-                                {% else %}
-                                    <a href=""><img src="{% static 'website/images/icons/user-icon.svg' %}" alt="user"></a>
-                                {% endif %}
-                            </li>
-                           
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <p style="display: none;padding: 0;margin:0; opacity: 0;">Fico is a contemporary furniture brand dedicated to redefining the relationship between craftsmanship, heritag and modern</p>
+      <nav class="nav nav--left" aria-label="Primary">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="#featured">Products</a>
+        <a href="#categories">Categories</a>
+        <a href="#story">About</a>
+        <a href="#footer">Contact</a>
+      </nav>
+
+      <a href="{% url 'home' %}" class="logo" aria-label="Atelier home">Atelier</a>
+
+      <div class="header__actions">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+
+
+        <!--Work of User Icon -->
+         {% if user.is_authenticated %}
+<div class="profile-nav">
+    <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+        </svg>
+    </button>
+
+    <ul>
+        <li><a href="{% url 'profile' %}">My Profile</a></li>
+        <li><a href="#">My Orders</a></li>
+        <li><a href="#">Wishlist</a></li>
+        <li><a href="#">Address</a></li>
+        <li><a href="#">Change Password</a></li>
+        <li><a href="{% url 'user_logout' %}">Logout</a></li>
+    </ul>
+</div>
+
+{% else %}
+<div class="profile-nav">
+    <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+        </svg>
+    </button>
+
+    <ul>
+        <li><a href="{% url 'user_login' %}">Login</a></li>
+        <li><a href="{% url 'user_register' %}">Register</a></li>
+        <li><a href="#">Forgot Password</a></li>
+    </ul>
+</div>
+{% endif %}
+
+       <button
+    type="button"
+    class="icon-btn icon-btn--cart cart-qty-box"
+    id="cartBtn"
+    onclick="cart_open()">
+
+    <svg viewBox="0 0 24 24"
+         width="20"
+         height="20"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5">
+        <path d="M6 7h12l-1 13H7L6 7Z"/>
+        <path d="M9 7a3 3 0 0 1 6 0"/>
+    </svg>
+
+    <span class="cart-count cart_item_quantity" id="cartCount">
+        {{ cart_item_count|default:0 }}
+    </span>
+</button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+      <a href="{% url 'home' %}">Home</a>
+      <a href="#featured">Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#story">About</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+        <p style="display: none;padding: 0;margin:0; opacity: 0;">Atelier is a contemporary furniture brand dedicated to redefining the relationship between craftsmanship, heritag and modern</p>
         <div class="currency-box" id="currency-box" style="display: none;">
             <div class="currency-container" id="currency-container">
                 <div class="currency-content">
                     <div class="currency-text">
                         <h3>International Shipping <span class="currency-close" onclick="closePopup()"> x </span> </h3>
-                        <p>Fico now delivers worldwide!
+                        <p>Atelier now delivers worldwide!
                             Enjoy your favourite pieces delivered to your
                             doorstep, no matter where you are!</p>
                     </div>

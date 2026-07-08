@@ -159,3 +159,62 @@ renderMore();
 
 // ---------- Footer year ----------
 document.getElementById("year").textContent = new Date().getFullYear();
+
+
+
+// ---------- Hero banner ----------
+document.addEventListener('DOMContentLoaded', function () {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  const prevBtn = document.getElementById('heroPrev');
+  const nextBtn = document.getElementById('heroNext');
+  let current = 0;
+  let autoSlideTimer;
+
+  if (slides.length <= 1) return;
+
+  function goToSlide(index) {
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+
+  function nextSlide() { goToSlide(current + 1); }
+  function prevSlide() { goToSlide(current - 1); }
+
+  function startAutoSlide() {
+    autoSlideTimer = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoSlide() {
+    clearInterval(autoSlideTimer);
+  }
+
+  nextBtn.addEventListener('click', function () {
+    nextSlide();
+    stopAutoSlide();
+    startAutoSlide();
+  });
+
+  prevBtn.addEventListener('click', function () {
+    prevSlide();
+    stopAutoSlide();
+    startAutoSlide();
+  });
+
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      goToSlide(i);
+      stopAutoSlide();
+      startAutoSlide();
+    });
+  });
+
+  const slider = document.getElementById('heroSlider');
+  slider.addEventListener('mouseenter', stopAutoSlide);
+  slider.addEventListener('mouseleave', startAutoSlide);
+
+  startAutoSlide();
+});

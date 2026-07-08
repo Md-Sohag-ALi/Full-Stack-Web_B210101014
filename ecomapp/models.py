@@ -317,7 +317,7 @@ class EmailOTP(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="profile")
 
-    profile_image = models.ImageField(upload_to="profile/",default="profile/default.png")
+    profile_image = models.ImageField(upload_to='profile_images/',default='profile_images/default.png')
 
     phone = models.CharField(max_length=15, blank=True)
 
@@ -327,3 +327,28 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username         
+
+class HeroBanner(models.Model):
+    eyebrow = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=200)
+    subtitle = models.TextField(max_length=300, blank=True)
+    banner_image = models.ImageField(upload_to='banners/')
+
+    primary_button_text = models.CharField(max_length=50, default="Shop Now")
+    primary_button_link = models.CharField(max_length=200, default="#featured")
+
+    secondary_button_text = models.CharField(max_length=50, blank=True)
+    secondary_button_link = models.CharField(max_length=200, blank=True)
+
+    badge_number = models.CharField(max_length=20, blank=True)
+    badge_label = models.CharField(max_length=100, blank=True)
+
+    order = models.PositiveIntegerField(default=0, help_text="Choto number age dekhabe (0,1,2...)")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', '-created_at']
+
+    def __str__(self):
+        return self.title  

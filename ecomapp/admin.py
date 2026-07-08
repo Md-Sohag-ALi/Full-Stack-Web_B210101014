@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import OrderCart, ProductMainCategory,ProductSubCategory,Product
+from .models import HeroBanner, OrderCart, ProductMainCategory,ProductSubCategory,Product
 
 # Register your models here.
 @admin.register(ProductMainCategory)
@@ -30,5 +30,11 @@ class ProductAdmin(admin.ModelAdmin):
     
     
 admin.site.register(OrderCart)
+
+@admin.register(HeroBanner)
+class HeroBannerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order', 'is_active', 'created_at')
+    list_filter = ('is_active',)
+    list_editable = ('order', 'is_active')
         
     

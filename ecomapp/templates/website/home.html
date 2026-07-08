@@ -1,133 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Atelier — thoughtfully made home goods and decor for considered living. Shop ceramics, textiles, and curated pieces for every room." />
-  <meta name="theme-color" content="#f7f3ec" />
-  <title>Atelier — Considered Goods for the Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/website/css/style.css" />
-</head>
-<body>
+{% extends 'web_base.html' %}
+{% load static %}
 
-  {% if messages %}
-    <div class="message">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+{% block title %}Atelier — Considered Goods for the Home{% endblock %}
+
+{% block metatag %}
+<meta name="description" content="Atelier — thoughtfully made home goods and decor for considered living. Shop ceramics, textiles, and curated pieces for every room." />
+<meta name="theme-color" content="#f7f3ec" />
+{% endblock %}
+
+{% block linkcss %}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
 
   <!-- Announcement bar -->
   <div class="announcement">
     <p>Complimentary shipping on orders over $75 — a little something for you</p>
   </div>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="container header__inner">
-      <button class="header__menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-        <span class="header__menu-icon"></span>
-      </button>
-
-      <nav class="nav nav--left" aria-label="Primary">
-        <a href="#top">Home</a>
-        <a href="#featured">Products</a>
-        <a href="#categories">Categories</a>
-        <a href="#story">About</a>
-        <a href="#footer">Contact</a>
-      </nav>
-
-      <a href="#top" class="logo" aria-label="Atelier home">Atelier</a>
-
-      <div class="header__actions">
-        <button class="icon-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        </button>
-
-
-        <!--Work of User Icon -->
-         {% if user.is_authenticated %}
-<div class="profile-nav">
-    <button class="icon-btn" aria-label="Account">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
-        </svg>
-    </button>
-
-    <ul>
-        <li><a href="{% url 'profile' %}">My Profile</a></li>
-        <li><a href="#">My Orders</a></li>
-        <li><a href="#">Wishlist</a></li>
-        <li><a href="#">Address</a></li>
-        <li><a href="#">Change Password</a></li>
-        <li><a href="{% url 'user_logout' %}">Logout</a></li>
-    </ul>
-</div>
-
-{% else %}
-<div class="profile-nav">
-    <button class="icon-btn" aria-label="Account">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
-        </svg>
-    </button>
-
-    <ul>
-        <li><a href="{% url 'user_login' %}">Login</a></li>
-        <li><a href="{% url 'user_register' %}">Register</a></li>
-        <li><a href="#">Forgot Password</a></li>
-    </ul>
-</div>
-{% endif %}
-
-        <button class="icon-btn icon-btn--cart" id="cartBtn" aria-label="Cart">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-      <a href="#top">Home</a>
-      <a href="#featured">Products</a>
-      <a href="#categories">Categories</a>
-      <a href="#story">About</a>
-      <a href="#footer">Contact</a>
-    </nav>
-  </header>
-
   <main id="top">
     <!-- Hero -->
-    <section class="hero">
+   {% if hero_banners %}
+<section class="hero-slider" id="heroSlider">
+  <div class="hero-slider__track" id="heroTrack">
+    {% for banner in hero_banners %}
+    <div class="hero-slide {% if forloop.first %}is-active{% endif %}">
       <div class="container hero__inner">
         <div class="hero__copy">
-          <span class="eyebrow">New — The Quiet Collection</span>
-          <h1 class="hero__title">Considered goods for a <em>well-lived</em> home.</h1>
-          <p class="hero__text">Honest materials, made-to-last craft, and pieces designed to settle quietly into everyday life. Curated in small batches, never mass produced.</p>
+          {% if banner.eyebrow %}<span class="eyebrow">{{ banner.eyebrow }}</span>{% endif %}
+          <h1 class="hero__title">{{ banner.title }}</h1>
+          {% if banner.subtitle %}<p class="hero__text">{{ banner.subtitle }}</p>{% endif %}
           <div class="hero__actions">
-            <a href="#featured" class="btn btn--primary">Shop the collection</a>
-            <a href="#categories" class="btn btn--ghost">Browse categories</a>
+            <a href="{{ banner.primary_button_link }}" class="btn btn--primary">{{ banner.primary_button_text }}</a>
+            {% if banner.secondary_button_text %}
+            <a href="{{ banner.secondary_button_link }}" class="btn btn--ghost">{{ banner.secondary_button_text }}</a>
+            {% endif %}
           </div>
         </div>
         <div class="hero__media">
-          <img src="images/hero.png" alt="A serene living room corner with a boucle armchair and a ceramic vase of dried grasses in warm daylight" />
+          <img src="{{ banner.banner_image.url }}" alt="{{ banner.title }}" />
+          {% if banner.badge_number %}
           <div class="hero__badge">
-            <span class="hero__badge-num">120+</span>
-            <span class="hero__badge-label">Makers &amp; small studios</span>
+            <span class="hero__badge-num">{{ banner.badge_number }}</span>
+            <span class="hero__badge-label">{{ banner.badge_label }}</span>
           </div>
+          {% endif %}
         </div>
       </div>
-    </section>
+    </div>
+    {% endfor %}
+  </div>
 
+  {% if hero_banners|length > 1 %}
+  <button class="hero-nav hero-nav--prev" id="heroPrev" aria-label="Previous slide">&#10094;</button>
+  <button class="hero-nav hero-nav--next" id="heroNext" aria-label="Next slide">&#10095;</button>
+
+  <div class="hero-dots" id="heroDots">
+    {% for banner in hero_banners %}
+    <button class="hero-dot {% if forloop.first %}is-active{% endif %}" data-slide="{{ forloop.counter0 }}" aria-label="Go to slide {{ forloop.counter }}"></button>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endif %}
     <!-- Marquee values -->
     <section class="marquee" aria-hidden="true">
       <div class="marquee__track" id="marqueeTrack">
@@ -139,9 +77,7 @@
       </div>
     </section>
 
-  
-
-   <!-- Top categories -->
+    <!-- Top categories -->
 <section class="section section--muted" id="categories">
     <div class="container">
 
@@ -165,8 +101,7 @@
     </div>
 </section>
 
-    
-    <!-- Featured Products -->
+      <!-- Featured Products -->
 <section class="section" id="featured">
     <div class="container">
 
@@ -227,43 +162,24 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer" id="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <a href="#top" class="logo">Atelier</a>
-        <p>Considered goods for a well-lived home.</p>
-      </div>
-      <div class="footer__cols">
-        <div class="footer__col">
-          <h3>Shop</h3>
-          <a href="#categories">Living</a>
-          <a href="#categories">Kitchen</a>
-          <a href="#categories">Decor</a>
-        </div>
-        <div class="footer__col">
-          <h3>Company</h3>
-          <a href="#story">Our story</a>
-          <a href="#featured">Makers</a>
-          <a href="#top">Journal</a>
-        </div>
-        <div class="footer__col">
-          <h3>Support</h3>
-          <a href="#top">Shipping</a>
-          <a href="#top">Returns</a>
-          <a href="#top">Contact</a>
-        </div>
-      </div>
-    </div>
-    <div class="container footer__bottom">
-      <p>&copy; <span id="year"></span> Atelier Studio. All rights reserved.</p>
-      <p>Designed with care.</p>
-    </div>
-  </footer>
-
   <!-- Cart toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="static/website/js/script.js"></script>
-</body>
-</html>
+{% endblock %}
+
+{% block linkScript %}
+
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/event.js' %}"></script>
+
+<script>
+    var swiper = new Swiper(".newCollections", {
+        slidesPerView: "auto",
+        spaceBetween: 15,
+        autoplay: {
+            delay: 5500,
+            disableOnInteraction: false,
+        },
+    });
+</script>
+{% endblock %}
