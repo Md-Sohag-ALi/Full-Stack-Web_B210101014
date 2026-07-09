@@ -117,6 +117,7 @@ def product_main_category_details(request, pk):
     }
     return render(request, 'product/product_main_category_details.html', context)
 
+
 @login_required
 def product_list(request):
     if not checkUserPermission(request, "can_view", "backend/product-list/"):

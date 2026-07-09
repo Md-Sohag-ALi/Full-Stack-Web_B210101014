@@ -6,7 +6,8 @@ urlpatterns = [
     path('dashboard/',views.ecom_dashboard , name = 'dashboard' ),
     path('setting-dashboard/',views.setting_dashboard , name = 'setting-dashboard' ),
     path('product-main-category-list/', views.product_main_category_list_view, name = 'product-main-category-list'),
-    path('add-product-main-category/', views.add_product_main_category, name = 'add-product-main-category'),
+    path('add-product-main-category-details/', views.add_product_main_category, name = 'add-product-main-category'),
+    
     path('product-main-category/<int:pk>/', views.product_main_category_details, name = 'product-main-category-details'),
     path('product-list/', views.product_list, name = 'product-list'),
     path('product-detail/<int:pk>/', views.product_detail, name = 'product-detail'),
