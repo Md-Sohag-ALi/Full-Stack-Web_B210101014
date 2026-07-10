@@ -7,7 +7,8 @@ urlpatterns = [
     path('setting-dashboard/',views.setting_dashboard , name = 'setting-dashboard' ),
     path('product-main-category-list/', views.product_main_category_list_view, name = 'product-main-category-list'),
     path('add-product-main-category-details/', views.add_product_main_category, name = 'add-product-main-category'),
-    
+    path(
+    "backend/product-main-category-edit/<int:pk>/",views.product_main_category_edit,name="product-main-category-edit"),
     path('product-main-category/<int:pk>/', views.product_main_category_details, name = 'product-main-category-details'),
     path('product-list/', views.product_list, name = 'product-list'),
     path('product-detail/<int:pk>/', views.product_detail, name = 'product-detail'),
@@ -40,4 +41,5 @@ urlpatterns = [
      path('payment/check/<str:str_data>/', views_payment.payment_check, name="payment_check"),
      path('profile/', views.profile, name='profile'),
      path("profile/edit/", views.edit_profile, name="edit_profile"),
+     path("backend/change-password/",views.change_password,name="change-password"),
 ]   

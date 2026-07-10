@@ -19,7 +19,9 @@ from ecomapp.models import (
 from django.db import transaction
 
 from ecomapp.utils import generate_otp
-
+from django.utils import timezone
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 # Create your views here.
 def ecom_dashboard(request):
@@ -116,6 +118,40 @@ def product_main_category_details(request, pk):
         'data': data,
     }
     return render(request, 'product/product_main_category_details.html', context)
+
+@login_required
+def product_main_category_edit(request, pk):
+    if not checkUserPermission(request, "can_update", "backend/product-main-category-list/"):
+        return render(request, "403.html")
+
+    category = get_object_or_404(ProductMainCategory, pk=pk)
+
+    if request.method == "POST":
+        category.main_cat_name = request.POST.get("main_cat_name")
+        category.description = request.POST.get("description")
+        category.cat_ordering = request.POST.get("cat_ordering")
+        category.is_active = request.POST.get("is_active") == "True"
+
+        # Image update
+        if request.FILES.get("cat_image"):
+            category.cat_image = request.FILES.get("cat_image")
+
+        category.updated_by = request.user
+        category.updated_at = timezone.now()
+
+        # Slug update when category name changes
+        category.cat_slug = ""
+        category.save()
+
+        messages.success(request, "Main Category updated successfully.")
+        return redirect("product-main-category-list")
+
+    context = {
+        "category": category,
+    }
+
+    return render(
+        request,"product/product_main_category_edit.html",context,)
 
 
 @login_required
@@ -552,4 +588,36 @@ def edit_profile(request):
 
     return render(request, "website/accounts/edit_profile.html", {
         "profile": profile
-    })             
+    })    
+    
+    
+    
+@login_required
+def change_password(request):
+
+    if not checkUserPermission(request, "can_update", "backend/dashboard/"):
+        return render(request, "403.html")
+
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            user = form.save()
+
+            # User কে logout না করার জন্য
+            update_session_auth_hash(request, user)
+
+            messages.success(request, "Password changed successfully.")
+            return redirect("dashboard")
+
+        else:
+            messages.error(request, "Please correct the errors below.")
+
+    else:
+        form = PasswordChangeForm(request.user)
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, "website/user/change_password.html", context)         

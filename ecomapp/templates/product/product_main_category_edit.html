@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Main Category{% endblock %}
+
+{% block content %}
+<section class="customer-list-section">
+    <div class="container">
+        <div class="content">
+
+            <div class="title-box">
+                <div class="page-title">
+                    <h3>Edit Main Category</h3>
+                </div>
+            </div>
+
+            <div class="form-area-content">
+                <div class="form-inner-content">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% if messages %}
+                            <div class="alert alert-info" style="color:red;">
+                                {% for message in messages %}
+                                    <p>{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+
+                            <div class="input-field">
+                                <label>Main Category Name</label>
+                                <input type="text"
+                                       name="main_cat_name"
+                                       value="{{ category.main_cat_name }}"
+                                       required>
+                            </div>
+
+                            <div class="input-field">
+                                <label>Category Image</label>
+                                <input type="file" name="cat_image">
+
+                                {% if category.cat_image %}
+                                    <div class="image-preview" style="margin-top:10px;">
+                                        <img src="{{ category.cat_image.url }}"
+                                             style="width:100%;border:1px solid #ddd;border-radius:6px;">
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="input-field">
+                                <label>Ordering</label>
+                                <input type="number"
+                                       name="cat_ordering"
+                                       value="{{ category.cat_ordering }}">
+                            </div>
+
+                            <div class="input-field">
+                                <label>Status</label>
+
+                                <select name="is_active" class="form-control">
+                                    <option value="True"
+                                        {% if category.is_active %}selected{% endif %}>
+                                        Active
+                                    </option>
+
+                                    <option value="False"
+                                        {% if not category.is_active %}selected{% endif %}>
+                                        Inactive
+                                    </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-field-full">
+                                <label>Description</label>
+
+                                <textarea name="description"
+                                          rows="4"
+                                          class="form-control">{{ category.description }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-button">
+                                <input type="submit"
+                                       class="button blue-button"
+                                       value="Update">
+
+                                <a href="{% url 'product-main-category-list' %}"
+                                   class="button primary-button cancle-button">
+                                   Cancel
+                                </a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
