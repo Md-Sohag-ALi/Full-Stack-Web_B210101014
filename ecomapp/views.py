@@ -25,9 +25,33 @@ from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 # Create your views here.
 def ecom_dashboard(request):
-   
-    return render(request, 'home/home.html')
+    # Summary statistics
+    total_products = Product.objects.count()
+    total_categories = ProductMainCategory.objects.count()
+    total_customers = Customer.objects.count()
+    total_orders = Order.objects.count()
 
+    # Order Status Summary
+    pending_orders = Order.objects.filter(status='pending').count()
+    processing_orders = Order.objects.filter(status='processing').count()
+    shipped_orders = Order.objects.filter(status='shipped').count()
+    delivered_orders = Order.objects.filter(status='delivered').count()
+    cancelled_orders = Order.objects.filter(status='cancelled').count()
+
+    context = {
+        "total_products": total_products,
+        "total_categories": total_categories,
+        "total_customers": total_customers,
+        "total_orders": total_orders,
+
+        "pending_orders": pending_orders,
+        "processing_orders": processing_orders,
+        "shipped_orders": shipped_orders,
+        "delivered_orders": delivered_orders,
+        "cancelled_orders": cancelled_orders,
+    }
+
+    return render(request, 'home/home.html', context)
 
 @login_required
 def paginate_data(request, page_num, data_list):
@@ -280,7 +304,7 @@ def home(request):
     }
     return render(request, 'website/home.html', context)
 
-def login_view(request):
+def user_login_view(request):
     if request.method == 'POST':
         phone = request.POST['phone']
         password = request.POST['password']
@@ -303,7 +327,7 @@ def login_view(request):
 
     return render(request, 'website/user/login.html')
 
-def register_view(request):
+def user_register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -324,13 +348,39 @@ def register_view(request):
     return render(request, 'website/user/register.html')
 
 @login_required
-def logout_view(request):
+def user_logout_view(request):
     logout(request)
     return redirect('home')
 
 
-def cart_amount_summary(request):
+#Admin Authintication
+def admin_logout_view(request):
+    logout(request)
+    return redirect('admin-login')
 
+def admin_login_view(request):
+    if request.user.is_authenticated:
+        return redirect('setting-dashboard')
+
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None and (user.is_staff or user.is_superuser):
+            login(request, user)
+            return redirect("setting-dashboard")
+
+        messages.error(request, "Invalid username or password.")
+
+    return render(request, "website/admin/admin_login.html")
+
+def cart_amount_summary(request):  
     sub_total_amount = 0
     total_vat = 0
     total_discount = 0
@@ -564,10 +614,10 @@ def verify_otp_view(request):
            
 @login_required
 def profile(request):
-    profile = UserProfile.objects.get(user=request.user)
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     return render(request, "website/accounts/profile.html", {
-        "profile": profile
+        "profile": profile 
     })  
 
 @login_required
@@ -620,4 +670,4 @@ def change_password(request):
         "form": form,
     }
 
-    return render(request, "website/user/change_password.html", context)         
+    return render(request, "website/admin/admin_change_password.html", context)         

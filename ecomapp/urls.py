@@ -17,13 +17,16 @@ urlpatterns = [
     path('products/<slug:product_slug>/', views.products_details, name = 'products-details'),
     path('', views.home, name = 'home'),
    
-    #Authintication
-    path('login/', views.login_view, name='user_login'),
-    path('register/', views.register_view, name='user_register'),
-    path('logout/', views.logout_view, name='user_logout'),
+    #User Authintication
+    path('login/', views.user_login_view, name='user_login'),
+    path('register/', views.user_register_view, name='user_register'),
+    path('logout/', views.user_logout_view, name='user_logout'),
     path('request-otp/', views.request_otp_view, name='request_otp'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     
+    #Admin Authintication
+     path('admin-logout/', views.admin_logout_view, name='admin-logout'),
+    path('admin-login/', views.admin_login_view, name='admin-login'),
     
     
     #ajax

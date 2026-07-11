@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0E0F13;
+    --card: #16181F;
+    --border: #262a35;
+    --text: #ECEDF1;
+    --muted: #8B8F9C;
+    --accent: #6C63FF;
+    --accent-soft: rgba(108, 99, 255, 0.15);
+    --error: #FF6B6B;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(108,99,255,0.12), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(108,99,255,0.08), transparent 45%),
+      var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    padding: 24px;
+  }
+
+  form{
+    width:100%;
+    max-width: 380px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 36px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    position: relative;
+    overflow: hidden;
+  }
+
+  form::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #8B7FFF 50%, var(--accent));
+  }
+
+  form::after{
+    content:"";
+    position:absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    top: 32px; right: 36px;
+    box-shadow: 0 0 12px 2px var(--accent-soft);
+  }
+
+  .heading{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .subheading{
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 28px;
+  }
+
+  label{
+    display:block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 18px 0 8px;
+  }
+
+  label:first-of-type{ margin-top: 0; }
+
+  input{
+    width: 100%;
+    background: #0F1117;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-size: 15px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  input::placeholder{ color: #565A66; }
+
+  input:focus{
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  button{
+    width: 100%;
+    margin-top: 26px;
+    padding: 13px 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  button:hover{
+    background: #7B73FF;
+    box-shadow: 0 8px 24px rgba(108,99,255,0.35);
+  }
+
+  button:active{ transform: translateY(1px); }
+
+  button:focus-visible{
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .messages{
+    list-style:none;
+    padding:0;
+    margin: 20px 0 0;
+  }
+
+  .messages p{
+    background: rgba(255,107,107,0.1);
+    border: 1px solid rgba(255,107,107,0.3);
+    color: var(--error) !important;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin: 0 0 8px;
+  }
+
+  @media (max-width: 420px){
+    form{ padding: 32px 24px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <h1 class="heading">Welcome back</h1>
+    <p class="subheading">Log in to continue your admin pannel</p>
+
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Enter your username" autocomplete="username">
+
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter your password" autocomplete="current-password">
+
+    <button type="submit">Login</button>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</form>
+
+</body>
+</html>

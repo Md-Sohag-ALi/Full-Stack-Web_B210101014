@@ -193,6 +193,7 @@ class OrderCart(models.Model):
 
 
 class Order(models.Model):
+    # Ekta colum create korbe
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('processing', 'Processing'),

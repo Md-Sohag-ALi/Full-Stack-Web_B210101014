@@ -1,8 +1,538 @@
 {% extends 'base.html' %}
+{% load tz %}
 
 {% block title %}Home | Ecommerce{% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Homepage!</h2>
-    
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  .dashboard-home{
+    --ink:        #14171F;
+    --muted:      #6B7080;
+    --border:     #E3E5EC;
+    --bg:         #F2F3F8;
+    --surface:    #FFFFFF;
+
+    --amber:      #E2A33D;  /* pending */
+    --blue:       #3E6AE1;  /* processing */
+    --teal:       #1F8A70;  /* shipped */
+    --green:      #2FA84F;  /* delivered */
+    --coral:      #E2574C; /* cancelled */
+
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    padding: 36px 22px 64px;
+    color: var(--ink);
+  }
+
+  .dashboard-home .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  /* ================= HERO / MANIFEST HEADER ================= */
+  .manifest-hero{
+    position: relative;
+    max-width: 1120px;
+    margin: 0 auto 34px;
+    border-radius: 18px;
+    background: var(--ink);
+    color: #F5F6FA;
+    padding: 30px 34px 26px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-shadow: 0 18px 40px rgba(20,23,31,0.22);
+  }
+
+  .manifest-hero::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 92% -10%, rgba(226,163,61,0.30), transparent 45%),
+      radial-gradient(circle at 6% 120%, rgba(62,106,225,0.28), transparent 45%);
+    pointer-events: none;
+  }
+
+  .manifest-hero .hero-left{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .manifest-hero .stamp{
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px dashed rgba(245,246,250,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    transform: rotate(-6deg);
+  }
+
+  .manifest-hero .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 6px;
+  }
+
+  .manifest-hero h2{
+    margin: 0 0 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .manifest-hero p{
+    margin: 0;
+    font-size: 14px;
+    color: rgba(245,246,250,0.7);
+  }
+
+  .manifest-hero .hero-right{
+    position: relative;
+    z-index: 1;
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: rgba(245,246,250,0.55);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .manifest-hero .hero-right strong{
+    display:block;
+    color: #F5F6FA;
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  .manifest-hero .status-dot{
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .manifest-hero .status-dot.green{ background: var(--green); }
+  .manifest-hero .status-dot.amber{ background: var(--amber); }
+  .manifest-hero .status-dot.coral{ background: var(--coral); }
+
+  @keyframes pulse{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: 0.35; }
+  }
+
+  /* ================= SECTION LABELS ================= */
+  .section-label{
+    max-width: 1120px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .section-label .tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: var(--ink);
+    padding: 3px 8px;
+    border-radius: 5px;
+  }
+
+  .section-label h3{
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .section-label .rule{
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--border) 0 6px, transparent 6px 10px);
+    margin-left: 4px;
+  }
+
+  /* ================= MANIFEST STAT CARDS ================= */
+  .manifest-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    max-width: 1120px;
+    margin: 0 auto 38px;
+  }
+
+  .manifest-card{
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px 16px;
+    opacity: 0;
+    animation: rise 0.45s ease forwards;
+  }
+
+  .manifest-card:nth-of-type(1){ animation-delay: 0.03s; }
+  .manifest-card:nth-of-type(2){ animation-delay: 0.09s; }
+  .manifest-card:nth-of-type(3){ animation-delay: 0.15s; }
+  .manifest-card:nth-of-type(4){ animation-delay: 0.21s; }
+
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(8px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .manifest-card .row-top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .manifest-card .icon-badge{
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--tint) 16%, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .manifest-card .icon-badge svg{
+    width: 18px;
+    height: 18px;
+    stroke: var(--tint);
+  }
+
+  .manifest-card .code{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  .manifest-card:nth-of-type(1){ --tint: var(--blue); }
+  .manifest-card:nth-of-type(2){ --tint: var(--teal); }
+  .manifest-card:nth-of-type(3){ --tint: var(--amber); }
+  .manifest-card:nth-of-type(4){ --tint: var(--coral); }
+
+  .manifest-card h4{
+    margin: 0 0 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .manifest-card h2{
+    margin: 0 0 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .manifest-card .barcode{
+    height: 16px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--ink) 0px, var(--ink) 2px,
+      transparent 2px, transparent 4px,
+      var(--ink) 4px, var(--ink) 5px,
+      transparent 5px, transparent 9px,
+      var(--ink) 9px, var(--ink) 11px,
+      transparent 11px, transparent 13px,
+      var(--ink) 13px, var(--ink) 16px,
+      transparent 16px, transparent 19px
+    );
+    opacity: 0.85;
+  }
+
+  /* ================= ORDER PIPELINE (SIGNATURE) ================= */
+  .pipeline-wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px 28px 26px;
+  }
+
+  .pipeline-track{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 8px;
+  }
+
+  .pipeline-track::before{
+    content: "";
+    position: absolute;
+    top: 27px;
+    left: 4%;
+    right: 4%;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--border) 0 7px, transparent 7px 12px);
+    z-index: 0;
+  }
+
+  .pipeline-stop{
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pipeline-stop .num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 2px solid var(--stop-color, var(--ink));
+    color: var(--stop-color, var(--ink));
+    margin-bottom: 12px;
+  }
+
+  .pipeline-stop.is-cancelled{
+    margin-top: 14px;
+  }
+
+  .pipeline-stop.is-cancelled .num{
+    border-style: dashed;
+  }
+
+  .pipeline-label{
+    position: relative;
+    width: 100%;
+    max-width: 152px;
+    background: color-mix(in srgb, var(--stop-color) 8%, white);
+    border: 1.5px dashed color-mix(in srgb, var(--stop-color) 55%, var(--border));
+    border-radius: 10px;
+    padding: 12px 10px 10px;
+  }
+
+  .pipeline-label::before,
+  .pipeline-label::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px dashed color-mix(in srgb, var(--stop-color) 55%, var(--border));
+  }
+
+  .pipeline-label::before{ left: -7px; }
+  .pipeline-label::after{ right: -7px; }
+
+  .pipeline-label h4{
+    margin: 0 0 3px;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--stop-color);
+  }
+
+  .pipeline-label h2{
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .pipeline-stop:nth-of-type(1){ --stop-color: var(--amber); }
+  .pipeline-stop:nth-of-type(2){ --stop-color: var(--blue); }
+  .pipeline-stop:nth-of-type(3){ --stop-color: var(--teal); }
+  .pipeline-stop:nth-of-type(4){ --stop-color: var(--green); }
+  .pipeline-stop.is-cancelled{ --stop-color: var(--coral); }
+
+  @media (max-width: 760px){
+    .pipeline-track{ flex-wrap: wrap; row-gap: 22px; }
+    .pipeline-track::before{ display: none; }
+    .pipeline-stop{ flex: 1 1 40%; }
+  }
+
+  @media (max-width: 480px){
+    .manifest-hero{ flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+    .manifest-hero .hero-right{ text-align: left; }
+    .manifest-grid{ grid-template-columns: 1fr 1fr; gap: 12px; }
+    .manifest-card{ padding: 16px 14px 14px; }
+    .manifest-card h2{ font-size: 24px; }
+  }
+</style>
+
+<div class="dashboard-home">
+
+  <div class="manifest-hero">
+    <div class="hero-left">
+      <div class="stamp">{{ request.user.first_name|default:request.user.username|first|upper }}</div>
+      <div class="hero-text">
+        <p class="eyebrow">Store Manifest</p>
+        <h2>Welcome back, {{ request.user.first_name|default:request.user.username }}</h2>
+        <p>Here's how the store is moving today.</p>
+      </div>
+    </div>
+    <div class="hero-right mono">
+      <strong>{% timezone "Asia/Dhaka" %}{% now "d M Y, H:i" %}{% endtimezone %}</strong>
+      {% if cancelled_orders > 0 and pending_orders > 0 %}
+        <span class="status-dot amber"></span>status: {{ pending_orders }} pending · {{ cancelled_orders }} cancelled
+      {% elif pending_orders > 0 %}
+        <span class="status-dot amber"></span>status: {{ pending_orders }} order{{ pending_orders|pluralize }} awaiting action
+      {% elif cancelled_orders > 0 %}
+        <span class="status-dot coral"></span>status: {{ cancelled_orders }} cancellation{{ cancelled_orders|pluralize }} logged
+      {% else %}
+        <span class="status-dot green"></span>status: all systems normal
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="section-label">
+    <span class="tag">01</span>
+    <h3>Store Totals</h3>
+    <span class="rule"></span>
+  </div>
+
+  <div class="manifest-grid">
+
+    <div class="manifest-card">
+      <div class="row-top">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg>
+        </div>
+        <span class="code mono">SKU&nbsp;· ALL</span>
+      </div>
+      <h4>Total Products</h4>
+      <h2>{{ total_products }}</h2>
+      <div class="barcode"></div>
+    </div>
+
+    <div class="manifest-card">
+      <div class="row-top">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <span class="code mono">CAT&nbsp;· ALL</span>
+      </div>
+      <h4>Total Categories</h4>
+      <h2>{{ total_categories }}</h2>
+      <div class="barcode"></div>
+    </div>
+
+    <div class="manifest-card">
+      <div class="row-top">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="code mono">CUST&nbsp;· ALL</span>
+      </div>
+      <h4>Total Customers</h4>
+      <h2>{{ total_customers }}</h2>
+      <div class="barcode"></div>
+    </div>
+
+    <div class="manifest-card">
+      <div class="row-top">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <span class="code mono">ORD&nbsp;· ALL</span>
+      </div>
+      <h4>Total Orders</h4>
+      <h2>{{ total_orders }}</h2>
+      <div class="barcode"></div>
+    </div>
+
+  </div>
+
+  <div class="section-label">
+    <span class="tag">02</span>
+    <h3>Order Pipeline</h3>
+    <span class="rule"></span>
+  </div>
+
+  <div class="pipeline-wrap">
+    <div class="pipeline-track">
+
+      <div class="pipeline-stop">
+        <div class="num">01</div>
+        <div class="pipeline-label">
+          <h4>Pending</h4>
+          <h2>{{ pending_orders }}</h2>
+        </div>
+      </div>
+
+      <div class="pipeline-stop">
+        <div class="num">02</div>
+        <div class="pipeline-label">
+          <h4>Processing</h4>
+          <h2>{{ processing_orders }}</h2>
+        </div>
+      </div>
+
+      <div class="pipeline-stop">
+        <div class="num">03</div>
+        <div class="pipeline-label">
+          <h4>Shipped</h4>
+          <h2>{{ shipped_orders }}</h2>
+        </div>
+      </div>
+
+      <div class="pipeline-stop">
+        <div class="num">04</div>
+        <div class="pipeline-label">
+          <h4>Delivered</h4>
+          <h2>{{ delivered_orders }}</h2>
+        </div>
+      </div>
+
+      <div class="pipeline-stop is-cancelled">
+        <div class="num">×</div>
+        <div class="pipeline-label">
+          <h4>Cancelled</h4>
+          <h2>{{ cancelled_orders }}</h2>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
 {% endblock %}
