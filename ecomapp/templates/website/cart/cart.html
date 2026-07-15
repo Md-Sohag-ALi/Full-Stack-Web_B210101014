@@ -36,8 +36,8 @@
                                                             </div>
                                                             <div class="cart-text">
                                                                 <p><strong>{{ cart.product.product_name }}</strong></p>
-                                                                <p><span>Colour: Black</span></p>
-                                                                <p><span>Size: 32</span></p>
+                                                                <p><span>Price :{{ cart.product.price }}</span></p>
+                                                                <p><span>Quantity : {{ cart.quantity }}</span></p>
                                                                 <div class="pocket-product-qty">
                                                                     <button type="button" id="decrement" class="decrement"><img src="{% static 'website/images/icons/minus.svg' %}" alt="-"></button>
                                                                     <input type="number" id="cart_qty" class="cart_qty cart_qty__{{ cart.product.id }}" min="0" max="50" data-product-id="{{ cart.product.id }}" value="{{ cart.quantity }}">
@@ -95,7 +95,7 @@
                                     <li><input type="text" class="form-control"   value={{customer.user}}></li>
                                     <li><input type="text" class="form-control"  value={{customer.phone}}></li>
                                     <li><input type="email" class="form-control" Placeholder="Email Address" value={{customer.user.email}}></li>
-                                    <li><textarea class="form-control" rows="2" name ="billing_address" Placeholder="Address"></textarea></li>
+                                    <li><textarea class="form-control"rows="2"id="billing_address"name="billing_address"placeholder="Address"></textarea><small id="address_error" style="display:none;color:#dc3545;font-size:13px;margin-top:5px;">Address is required.</small></li>
                                 </ul>
                             </div>
                             <div class="checkout-input-field">
@@ -125,6 +125,30 @@
     </form>
 </section>
 
+<script>
+// Validate billing address before submitting the form
+document.getElementById("cart_form").addEventListener("submit", function(e){
 
+    let address = document.getElementById("billing_address");
+    let error = document.getElementById("address_error");
+
+    if(address.value.trim() === ""){
+
+        e.preventDefault();
+
+        address.style.borderColor="#dc3545";
+        error.style.display="block";
+
+        address.focus();
+
+    }else{
+
+        address.style.borderColor="";
+        error.style.display="none";
+
+    }
+
+});
+</script>
 
 {% endblock %}

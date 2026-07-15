@@ -44,5 +44,8 @@ urlpatterns = [
      path('payment/check/<str:str_data>/', views_payment.payment_check, name="payment_check"),
      path('profile/', views.profile, name='profile'),
      path("profile/edit/", views.edit_profile, name="edit_profile"),
-     path("backend/change-password/",views.change_password,name="change-password"),
+     path("backend/change-password/",views.admin_change_password,name="admin-change-password"),
+     path("user/change-password/",views.user_change_password,name="user-change-password"),
+     path("search/", views.search_product, name="search_product"),
+     path("navproduct/", views.nav_product_list, name="navproduct-list")
 ]   

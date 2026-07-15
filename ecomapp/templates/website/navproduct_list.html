@@ -1,0 +1,598 @@
+{% extends "web_base.html" %}
+{% load static %}
+
+{% block title %}All Products{% endblock %}
+
+{% block linkcss %}
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+:root{
+    --bg:#f7f4ef;
+    --card:#ffffff;
+    --line:#e8e2d8;
+    --text:#1f1f1f;
+    --muted:#8a8a8a;
+    --accent:#c4693f;
+    --accent-dark:#a8532c;
+    --gold:#cfa15a;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+.products-page{
+    background:
+        radial-gradient(circle at 10% 10%, rgba(196,105,63,0.05) 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(207,161,90,0.06) 0%, transparent 50%),
+        var(--bg);
+    padding:0 0 70px;
+    font-family:'Jost', sans-serif;
+    color:var(--text);
+}
+
+/* ---------- Hero ---------- */
+
+.shop-hero{
+    position:relative;
+    background:linear-gradient(135deg,#1f1f1f 0%,#3a2b23 100%);
+    padding:70px 20px 60px;
+    text-align:center;
+    overflow:hidden;
+    margin-bottom:50px;
+}
+
+.shop-hero::before,
+.shop-hero::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(196,105,63,0.35), transparent 70%);
+    filter:blur(10px);
+}
+
+.shop-hero::before{
+    top:-100px;
+    left:-80px;
+}
+
+.shop-hero::after{
+    bottom:-120px;
+    right:-60px;
+    background:radial-gradient(circle, rgba(207,161,90,0.3), transparent 70%);
+}
+
+.shop-hero span.eyebrow{
+    position:relative;
+    text-transform:uppercase;
+    letter-spacing:5px;
+    color:var(--gold);
+    font-size:13px;
+    font-weight:500;
+}
+
+.shop-hero h2{
+    position:relative;
+    font-family:'Cormorant Garamond',serif;
+    font-size:58px;
+    font-weight:600;
+    color:#fff;
+    margin:14px 0 10px;
+}
+
+.shop-hero p{
+    position:relative;
+    color:#cfcfcf;
+    max-width:520px;
+    margin:0 auto;
+    font-size:15px;
+    letter-spacing:.3px;
+}
+
+/* ---------- Layout ---------- */
+
+.shop-layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:35px;
+    padding:0 20px;
+    max-width:1300px;
+    margin:0 auto;
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar{
+    background:var(--card);
+    padding:30px 25px;
+    border-radius:16px;
+    height:fit-content;
+    border:1px solid var(--line);
+    box-shadow:0 10px 30px rgba(0,0,0,.03);
+    position:sticky;
+    top:20px;
+}
+
+.sidebar h4{
+    margin-bottom:20px;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:2.5px;
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.sidebar h4::before{
+    content:"";
+    width:16px;
+    height:2px;
+    background:var(--accent);
+    display:inline-block;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+    margin:0 0 10px;
+}
+
+.sidebar li{
+    margin-bottom:4px;
+}
+
+.sidebar a{
+    color:#444;
+    text-decoration:none;
+    font-size:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:9px 10px;
+    border-radius:8px;
+    transition:.25s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    color:var(--accent);
+    background:rgba(196,105,63,0.08);
+    padding-left:16px;
+}
+
+.sidebar a i{
+    font-size:11px;
+    opacity:0;
+    transition:.25s;
+}
+
+.sidebar a:hover i{
+    opacity:1;
+}
+
+/* ---------- Toolbar ---------- */
+
+.shop-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.shop-toolbar .result-count{
+    font-size:14px;
+    color:var(--muted);
+}
+
+.shop-toolbar .result-count strong{
+    color:var(--text);
+}
+
+/* ---------- Grid & Cards ---------- */
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:28px;
+}
+
+.product-card{
+    position:relative;
+    background:var(--card);
+    border-radius:16px;
+    overflow:hidden;
+    text-decoration:none;
+    color:var(--text);
+    border:1px solid var(--line);
+    transition:transform .35s ease, box-shadow .35s ease;
+    display:flex;
+    flex-direction:column;
+}
+
+.product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.10);
+    border-color:transparent;
+}
+
+.product-media{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+}
+
+.product-media img{
+    width:100%;
+    height:250px;
+    object-fit:contain;
+    background:#fff;
+    transition:transform .5s ease;
+    padding:10px;
+}
+
+.product-card:hover .product-media img{
+    transform:scale(1.07);
+}
+
+.quick-actions{
+    position:absolute;
+    top:14px;
+    right:14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    opacity:0;
+    transform:translateX(10px);
+    transition:.3s ease;
+}
+
+.product-card:hover .quick-actions{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.quick-actions span{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 6px 16px rgba(0,0,0,.15);
+    color:var(--text);
+    font-size:14px;
+    transition:.2s;
+}
+
+.quick-actions span:hover{
+    background:var(--accent);
+    color:#fff;
+}
+
+.badge{
+    position:absolute;
+    top:14px;
+    left:14px;
+    background:var(--accent);
+    color:#fff;
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:20px;
+    font-weight:500;
+}
+
+.product-info{
+    padding:20px 20px 22px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+
+.product-info h3{
+    font-size:21px;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    margin-bottom:8px;
+    line-height:1.25;
+}
+
+.product-info p{
+    color:var(--muted);
+    font-size:13.5px;
+    min-height:40px;
+    line-height:1.5;
+    margin-bottom:14px;
+}
+
+.price-row{
+    margin-top:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+}
+
+.price{
+    font-size:21px;
+    font-weight:600;
+    color:var(--accent-dark);
+}
+
+.price small{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:400;
+    margin-right:2px;
+}
+
+.buy-btn{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:var(--text);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    transition:.25s;
+}
+
+.product-card:hover .buy-btn{
+    background:var(--accent);
+    transform:rotate(-8deg);
+}
+
+/* ---------- Empty state ---------- */
+
+.empty-state{
+    grid-column:1/-1;
+    text-align:center;
+    padding:80px 20px;
+    color:var(--muted);
+}
+
+.empty-state i{
+    font-size:46px;
+    color:var(--line);
+    margin-bottom:16px;
+    display:block;
+}
+
+.empty-state h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    color:var(--text);
+}
+
+/* ---------- Pagination ---------- */
+
+.pagination{
+    margin-top:60px;
+    justify-content:center;
+    display:flex;
+}
+
+.pagination a,
+.pagination span{
+    width:42px;
+    height:42px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:1px solid var(--line);
+    margin:0 5px;
+    text-decoration:none;
+    color:var(--text);
+    border-radius:10px;
+    font-size:14px;
+    background:#fff;
+    transition:.25s;
+}
+
+.pagination a:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+}
+
+.pagination .active{
+    background:var(--text);
+    color:#fff;
+    border-color:var(--text);
+}
+
+@media(max-width:991px){
+
+.shop-layout{
+    grid-template-columns:1fr;
+}
+
+.sidebar{
+    order:2;
+    position:static;
+}
+
+.shop-hero h2{
+    font-size:42px;
+}
+
+}
+
+</style>
+
+
+<section class="products-page">
+
+<div class="shop-hero">
+    <span class="eyebrow">Curated Collection</span>
+    <h2>All Products</h2>
+    <p>Explore handpicked pieces crafted with care — quality, style and comfort in every detail.</p>
+</div>
+
+<div class="container-fluid">
+
+<div class="shop-layout">
+
+
+<div class="sidebar">
+
+<h4>Categories</h4>
+
+<ul>
+
+<li>
+<a href="{% url 'product-list' %}" class="active">
+All Products <i class="fa-solid fa-chevron-right"></i>
+</a>
+</li>
+
+{% for category in categories %}
+
+<li>
+
+<a href="#">
+
+{{ category.main_cat_name }} <i class="fa-solid fa-chevron-right"></i>
+
+</a>
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<div>
+
+<div class="shop-toolbar">
+    <div class="result-count">
+        Showing <strong>{{ products|length }}</strong> product{{ products|length|pluralize }}
+    </div>
+</div>
+
+<div class="products-grid">
+
+{% for product in products %}
+
+<a href="{% url 'product-detail' product.id %}" class="product-card">
+
+<div class="product-media">
+
+{% if product.product_image %}
+<img src="{{ product.product_image.url }}">
+{% else %}
+<img src="{% static 'website/images/no-image.png' %}">
+{% endif %}
+
+<div class="quick-actions">
+    <span title="Wishlist"><i class="fa-regular fa-heart"></i></span>
+    <span title="Quick view"><i class="fa-regular fa-eye"></i></span>
+</div>
+
+</div>
+
+<div class="product-info">
+
+<h3>{{ product.product_name }}</h3>
+
+<p>
+
+{{ product.description|truncatewords:12 }}
+
+</p>
+
+<div class="price-row">
+
+<div class="price">
+
+<small>৳</small>{{ product.price }}
+
+</div>
+
+<div class="buy-btn">
+    <i class="fa-solid fa-bag-shopping"></i>
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+{% empty %}
+
+<div class="empty-state">
+    <i class="fa-regular fa-face-frown-open"></i>
+    <h3>No Product Found</h3>
+</div>
+
+{% endfor %}
+
+</div>
+
+
+{% if products.has_other_pages %}
+
+<div class="pagination d-flex">
+
+{% if products.has_previous %}
+<a href="?page={{ products.previous_page_number }}">«</a>
+{% endif %}
+
+{% for i in products.paginator.page_range %}
+
+{% if products.number == i %}
+
+<span class="active">
+
+{{ i }}
+
+</span>
+
+{% else %}
+
+<a href="?page={{ i }}">
+
+{{ i }}
+
+</a>
+
+{% endif %}
+
+{% endfor %}
+
+{% if products.has_next %}
+<a href="?page={{ products.next_page_number }}">»</a>
+{% endif %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

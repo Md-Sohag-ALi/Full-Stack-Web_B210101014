@@ -22,6 +22,7 @@ from ecomapp.utils import generate_otp
 from django.utils import timezone
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.db.models import Q
 # Create your views here.
 # Create your views here.
 def ecom_dashboard(request):
@@ -293,16 +294,22 @@ def add_new_product(request):
     return render(request, 'product/add_new_product.html',context)
 
 def home(request):
+    hero_banner = HeroBanner.objects.filter(is_active=True).first()
+
     main_categories = ProductMainCategory.objects.filter(is_active=True)
-    featured_products = Product.objects.filter(is_featured=True, is_active=True).order_by('-id')[:10]
-    hero_banners = HeroBanner.objects.filter(is_active=True)
+
+    featured_products = Product.objects.filter(
+        is_featured=True,
+        is_active=True
+    ).order_by("-id")[:10]
 
     context = {
-        'main_categories': main_categories,
-        'featured_products': featured_products,
-        'hero_banners': hero_banners,
+        "hero_banner": hero_banner,
+        "main_categories": main_categories,
+        "featured_products": featured_products,
     }
-    return render(request, 'website/home.html', context)
+
+    return render(request, "website/home.html", context)
 
 def user_login_view(request):
     if request.method == 'POST':
@@ -425,7 +432,9 @@ def products_details(request, product_slug):
 
 def add_or_update_cart(request):
 
-    
+    print("User:", request.user)
+    print("Authenticated:", request.user.is_authenticated)
+    print("Method:", request.method)
     is_authenticated = request.user.is_authenticated
     
     
@@ -643,7 +652,7 @@ def edit_profile(request):
     
     
 @login_required
-def change_password(request):
+def admin_change_password(request):
 
     if not checkUserPermission(request, "can_update", "backend/dashboard/"):
         return render(request, "403.html")
@@ -670,4 +679,68 @@ def change_password(request):
         "form": form,
     }
 
-    return render(request, "website/admin/admin_change_password.html", context)         
+    return render(request, "website/admin/admin_change_password.html", context)  
+@login_required
+def user_change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            user = form.save()
+
+            # Password change করার পর logout হবে না
+            update_session_auth_hash(request, user)
+
+            messages.success(request, "Your password has been changed successfully.")
+            return redirect("profile")   
+
+        else:
+            messages.error(request, "Please correct the errors below.")
+
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, "website/admin/admin_change_password.html", {
+        "form": form
+    })
+    
+    
+
+def search_product(request):
+    query = request.GET.get("q", "").strip()
+
+    products = Product.objects.filter(is_active=True)
+
+    if query:
+        products = products.filter(
+            Q(product_name__icontains=query) |
+            Q(main_category__main_cat_name__icontains=query) |
+            Q(sub_category__sub_cat_name__icontains=query)
+        ).distinct()
+
+    context = {
+        "products": products,
+        "query": query,
+    }
+
+    return render(request, "website/search.html", context)
+          
+def nav_product_list(request):
+
+    products = Product.objects.filter(is_active=True).select_related("main_category","sub_category").order_by("-id")
+
+    categories = ProductMainCategory.objects.filter(is_active=True).order_by("cat_ordering")
+
+    # Pagination (12 products per page)
+    paginator = Paginator(products, 12)
+    page = request.GET.get("page")
+    products = paginator.get_page(page)
+
+    context = {
+        "products": products,
+        "categories": categories,
+    }
+
+    return render(request, "website/navproduct_list.html", context)
+    
+              

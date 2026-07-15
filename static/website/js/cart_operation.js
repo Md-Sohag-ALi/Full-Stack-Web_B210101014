@@ -186,20 +186,34 @@ $(document).ready(function () {
         updateCart(this);
     });
 
-    // hamburger-menu-show
-    // document.getElementById("hamburger-menu-show").addEventListener("click", function () {
-    //     const menu = document.getElementById("hamburger-nav-menu");
-        
-    //     if (menu.classList.contains("show")) {
-    //         menu.classList.remove("show");
-    //         setTimeout(() => {
-    //             menu.style.display = "none"; 
-    //         }, 300); 
-    //     } else {
-    //         menu.style.display = "block";
-    //         setTimeout(() => {
-    //             menu.classList.add("show");
-    //         }, 10); 
-    //     }
-    // });
+//hamburger-menu-show
+const menuBtn = document.getElementById("menuBtn");
+const mobileNav = document.getElementById("mobileNav");
+
+if (menuBtn && mobileNav) {
+
+    menuBtn.addEventListener("click", function () {
+
+        mobileNav.classList.toggle("open");
+
+        this.setAttribute(
+            "aria-expanded",
+            mobileNav.classList.contains("open")
+        );
+
+    });
+
+    // Menu-এর বাইরে click করলে menu বন্ধ হবে
+document.addEventListener("click", function (e) {
+
+    if (
+        !mobileNav.contains(e.target) &&
+        !menuBtn.contains(e.target)
+    ) {
+        mobileNav.classList.remove("open");
+    }
+
+});
+
+}
 });

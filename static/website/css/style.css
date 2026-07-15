@@ -120,13 +120,60 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .header.menu-open .header__menu-icon::before { top: 0; transform: rotate(45deg); }
 .header.menu-open .header__menu-icon::after { top: 0; transform: rotate(-45deg); }
 
-.mobile-nav {
-  display: none; flex-direction: column;
-  border-top: 1px solid var(--line);
-  padding: 8px 24px 20px;
+.mobile-nav{
+    display:none;
+    position:absolute;
+    top:70px;
+    left:20px;
+    width:200px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+    padding:10px 0;
+    z-index:999;
 }
-.mobile-nav a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
-.mobile-nav.open { display: flex; }
+
+.mobile-nav.open{
+    display:block;
+    animation:menuFade .25s ease;
+}
+
+.header{
+    position:relative;
+}
+@media(min-width:769px){
+
+    .mobile-nav{
+        display:none !important;
+    }
+
+}
+.mobile-nav a{
+    display:block;
+    padding:12px 20px;
+    color:#222;
+    text-decoration:none;
+    font-size:15px;
+    border:none;
+    transition:.25s;
+}
+
+.mobile-nav a:hover{
+    background:#f7f7f7;
+    padding-left:28px;
+    color:#C4693F;
+}
+
+@keyframes menuFade{
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
 /* ---------- Hero ---------- */
 .hero { padding: 64px 0 40px; }
@@ -2796,4 +2843,185 @@ section.about-section {
   background: #C4693F;
   width: 24px;
   border-radius: 5px;
+}
+
+
+
+
+
+/* ===========================
+   Hero Slider
+=========================== */
+
+.hero-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.hero-slider__track {
+    position: relative;
+    width: 100%;
+}
+
+.hero-slide {
+    display: none;
+    width: 100%;
+    height: 550px; /* প্রয়োজন অনুযায়ী পরিবর্তন করুন */
+    justify-content: center;
+    align-items: center;
+    background: #f8f8f8;
+    animation: fadeSlide 0.6s ease;
+}
+
+.hero-slide.is-active {
+    display: flex;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ছবি কাটবে না */
+    object-position: center;
+    display: block;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ===========================
+   Navigation Buttons
+=========================== */
+
+.hero-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.hero-nav:hover {
+    background: #ffffff;
+}
+
+.hero-nav--prev {
+    left: 20px;
+}
+
+.hero-nav--next {
+    right: 20px;
+}
+
+/* ===========================
+   Slider Dots
+=========================== */
+
+.hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.hero-dot {
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.hero-dot.is-active {
+    width: 24px;
+    border-radius: 5px;
+    background: #C4693F;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 992px) {
+    .hero-slide {
+        height: 420px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-slide {
+        height: 320px;
+    }
+
+    .hero-nav {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-slide {
+        height: 250px;
+    }
+
+    .hero-nav {
+        display: none;
+    }
+}
+
+
+/* Search Icon*/
+.search-wrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#searchForm{
+    position: absolute;
+    top: 50%;
+    right: 35px;              /* search icon-এর বাম পাশে */
+    transform: translateY(-50%);
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+#searchForm.active{
+    width: 250px;
+    opacity: 1;
+}
+
+#searchForm input{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 0 15px;
+    background: #fff;
 }

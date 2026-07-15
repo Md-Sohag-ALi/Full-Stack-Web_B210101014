@@ -16,54 +16,52 @@
 
 {% block content %}
 
-  <!-- Announcement bar -->
-  <div class="announcement">
-    <p>Complimentary shipping on orders over $75 — a little something for you</p>
-  </div>
-
   <main id="top">
     <!-- Hero -->
-   {% if hero_banners %}
-<section class="hero-slider" id="heroSlider">
-  <div class="hero-slider__track" id="heroTrack">
-    {% for banner in hero_banners %}
-    <div class="hero-slide {% if forloop.first %}is-active{% endif %}">
-      <div class="container hero__inner">
+   {% if hero_banner %}
+<section class="hero">
+    <div class="container hero__inner">
+
         <div class="hero__copy">
-          {% if banner.eyebrow %}<span class="eyebrow">{{ banner.eyebrow }}</span>{% endif %}
-          <h1 class="hero__title">{{ banner.title }}</h1>
-          {% if banner.subtitle %}<p class="hero__text">{{ banner.subtitle }}</p>{% endif %}
-          <div class="hero__actions">
-            <a href="{{ banner.primary_button_link }}" class="btn btn--primary">{{ banner.primary_button_text }}</a>
-            {% if banner.secondary_button_text %}
-            <a href="{{ banner.secondary_button_link }}" class="btn btn--ghost">{{ banner.secondary_button_text }}</a>
+            {% if hero_banner.eyebrow %}
+                <span class="eyebrow">{{ hero_banner.eyebrow }}</span>
             {% endif %}
-          </div>
+
+            <h1 class="hero__title">
+                {{ hero_banner.title }}
+            </h1>
+
+            {% if hero_banner.subtitle %}
+                <p class="hero__text">
+                    {{ hero_banner.subtitle }}
+                </p>
+            {% endif %}
+
+            <div class="hero__actions">
+                <a href="{{ hero_banner.primary_button_link }}" class="btn btn--primary">
+                    {{ hero_banner.primary_button_text }}
+                </a>
+
+                {% if hero_banner.secondary_button_text %}
+                    <a href="{{ hero_banner.secondary_button_link }}" class="btn btn--ghost">
+                        {{ hero_banner.secondary_button_text }}
+                    </a>
+                {% endif %}
+            </div>
         </div>
+
         <div class="hero__media">
-          <img src="{{ banner.banner_image.url }}" alt="{{ banner.title }}" />
-          {% if banner.badge_number %}
-          <div class="hero__badge">
-            <span class="hero__badge-num">{{ banner.badge_number }}</span>
-            <span class="hero__badge-label">{{ banner.badge_label }}</span>
-          </div>
-          {% endif %}
+            <img src="{{ hero_banner.banner_image.url }}" alt="{{ hero_banner.title }}">
+
+            {% if hero_banner.badge_number %}
+            <div class="hero__badge">
+                <span class="hero__badge-num">{{ hero_banner.badge_number }}</span>
+                <span class="hero__badge-label">{{ hero_banner.badge_label }}</span>
+            </div>
+            {% endif %}
         </div>
-      </div>
+
     </div>
-    {% endfor %}
-  </div>
-
-  {% if hero_banners|length > 1 %}
-  <button class="hero-nav hero-nav--prev" id="heroPrev" aria-label="Previous slide">&#10094;</button>
-  <button class="hero-nav hero-nav--next" id="heroNext" aria-label="Next slide">&#10095;</button>
-
-  <div class="hero-dots" id="heroDots">
-    {% for banner in hero_banners %}
-    <button class="hero-dot {% if forloop.first %}is-active{% endif %}" data-slide="{{ forloop.counter0 }}" aria-label="Go to slide {{ forloop.counter }}"></button>
-    {% endfor %}
-  </div>
-  {% endif %}
 </section>
 {% endif %}
     <!-- Marquee values -->

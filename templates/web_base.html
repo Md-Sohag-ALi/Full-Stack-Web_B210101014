@@ -27,7 +27,7 @@
 
       <nav class="nav nav--left" aria-label="Primary">
         <a href="{% url 'home' %}">Home</a>
-        <a href="#featured">Products</a>
+        <a href="{% url 'navproduct-list' %}">Products</a>
         <a href="#categories">Categories</a>
         <a href="#story">About</a>
         <a href="#footer">Contact</a>
@@ -36,9 +36,35 @@
       <a href="{% url 'home' %}" class="logo" aria-label="Atelier home">Atelier</a>
 
       <div class="header__actions">
-        <button class="icon-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        </button>
+       <div class="search-wrapper">
+
+    <button class="icon-btn" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24"
+             width="20"
+             height="20"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5">
+
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m21 21-4.3-4.3"/>
+
+        </svg>
+    </button>
+
+    <form action="{% url 'search_product' %}"
+          method="GET"
+          id="searchForm">
+
+        <input
+            type="text"
+            name="q"
+            placeholder="Search products..."
+            autocomplete="off">
+
+    </form>
+
+</div>
 
 
         <!--Work of User Icon -->
@@ -56,7 +82,7 @@
         <li><a href="#">My Orders</a></li>
         <li><a href="#">Wishlist</a></li>
         <li><a href="#">Address</a></li>
-        <li><a href="{% url 'change-password' %}">Change Password</a></li>
+        <li><a href="{% url 'user-change-password' %}">Change Password</a></li>
         <li><a href="{% url 'user_logout' %}">Logout</a></li>
     </ul>
 </div>
@@ -242,10 +268,35 @@
 
         <script>
 
-            
-        </script>
+       document.addEventListener("DOMContentLoaded", function () {
 
-        {% block linkScript %}{% endblock %}
+       const searchBtn = document.getElementById("searchBtn");
+       const searchForm = document.getElementById("searchForm");
+
+       if (searchBtn && searchForm) {
+
+        searchBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            searchForm.classList.toggle("active");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!searchForm.contains(e.target) &&
+                !searchBtn.contains(e.target)) {
+                searchForm.classList.remove("active");
+            }
+        });
+
+       }
+
+      });
+    </script>
+    
+
+{% block linkScript %}
+
+{% endblock %}
 
        
       
